@@ -1,0 +1,8 @@
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.Model\obj\Debug\apiFormTranslator.Model.csprojResolveAssemblyReference.cache
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.Model\bin\Debug\apiFormTranslator.Model.dll.config
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.Model\bin\Debug\apiFormTranslator.Model.dll
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.Model\bin\Debug\apiFormTranslator.Model.pdb
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.Model\obj\Debug\apiFormTranslator.Model.dll
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.Model\obj\Debug\apiFormTranslator.Model.pdb
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.Model\bin\Debug\apiFormTranslator.DAL.dll
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.Model\bin\Debug\apiFormTranslator.DAL.pdb

@@ -1,0 +1,1746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.prometric.com/webservices/intelitest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.prometric.com/webservices/intelitest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.prometric.com/webservices/intelitest">
+      <s:element name="DeleteContentOutlineDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteContentOutlineDomainResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="user" type="tns:User" />
+      <s:complexType name="User">
+        <s:attribute name="currentContextId" type="s:string" />
+        <s:attribute name="userName" type="s:string" />
+        <s:attribute name="userId" type="s:string" />
+        <s:attribute name="authenticated" type="s:boolean" use="required" />
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="LoadContentOutline">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadContentOutlineResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadContentOutlineResult" type="tns:ContentOutline" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ContentOutline">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="objDomainPointList" type="tns:ArrayOfContentOutlineDomain" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContentOutlineDomain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContentOutlineDomain" nillable="true" type="tns:ContentOutlineDomain" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ContentOutlineDomain">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Level" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemPercent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DoNotUseICSChildren" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="RootContentOutlineDomain" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SiblingOrderIndex" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ICSCodes" type="tns:ContentOutlineIcsCode" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContentOutlineSubdomains" type="tns:ContentOutlineDomain" />
+        </s:sequence>
+        <s:attribute name="uuid" type="s:string" />
+        <s:attribute name="ownerId" type="s:string" />
+        <s:attribute name="isLocked" type="s:boolean" use="required" />
+        <s:attribute name="createUser" type="s:string" />
+        <s:attribute name="createDatetime" type="s:string" />
+        <s:attribute name="modifiedUser" type="s:string" />
+        <s:attribute name="modifiedDatetime" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ContentOutlineIcsCode">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:NameValuePair">
+            <s:attribute name="folderId" type="s:string" />
+            <s:attribute name="folderAttributeId" type="s:string" />
+            <s:attribute name="icsCode" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="NameValuePair">
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="value" type="s:string" />
+      </s:complexType>
+      <s:element name="LoadContentOutlineDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadContentOutlineDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadContentOutlineDomainResult" type="tns:ContentOutlineDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadContentOutlineDomainList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadContentOutlineDomainListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadContentOutlineDomainListResult" type="tns:ArrayOfContentOutlineDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveContentOutlineDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obj" type="tns:ContentOutlineDomain" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveContentOutlineDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveContentOutlineDomainResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContentOutlineDomainItemCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="contentOutlineDomainRootUUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemListUUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContentOutlineDomainItemCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContentOutlineDomainItemCountResult" type="tns:ArrayOfCODItemCount" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCODItemCount">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CODItemCount" nillable="true" type="tns:CODItemCount" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CODItemCount">
+        <s:attribute name="uuid" type="s:string" />
+        <s:attribute name="title" type="s:string" />
+        <s:attribute name="number" type="s:int" use="required" />
+        <s:attribute name="requiredItems" type="s:int" use="required" />
+        <s:attribute name="selectedItems" type="s:int" use="required" />
+        <s:attribute name="unknown" type="s:boolean" use="required" />
+        <s:attribute name="selectedScoredItems" type="s:int" use="required" />
+        <s:attribute name="selectedUnscoredItems" type="s:int" use="required" />
+      </s:complexType>
+      <s:element name="GetContentOutlineDomainItemCount2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="contentOutlineDomainRootUUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemList" type="tns:ItemList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedDatetime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedDatetime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentOutlineId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkflowId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemListElements" type="tns:ArrayOfItemListElement" />
+          <s:element minOccurs="0" maxOccurs="1" name="EffectiveDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpirationDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfItemListElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemListElement" nillable="true" type="tns:ItemListElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemListElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemListElementType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemListElementId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ordinal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FormWeight" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Selectable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Equator" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Scored" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewElement" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetContentOutlineDomainItemCount2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContentOutlineDomainItemCount2Result" type="tns:ArrayOfCODItemCount" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloneExam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newExamCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strFolderId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CloneExamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CloneExamResult" type="tns:Exam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Exam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Attributes" type="tns:ArrayOfIBAttribute" />
+          <s:element minOccurs="0" maxOccurs="1" name="Binaries" type="tns:ArrayOfIBBinary" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="tns:ArrayOfContentVersionComment" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceExamId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="contentOutlineId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CutScore" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExamType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExamTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExamName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PretestItemCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalExamTime" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReferenceListRequiredInd" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="examCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="effectiveStartDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="effectiveEndDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BreakLength" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="folderId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="referenceListId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="clientProgramId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ScoredItemCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PercentCutScore" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rounding" type="s:string" />
+        </s:sequence>
+        <s:attribute name="isLocked" type="s:boolean" use="required" />
+        <s:attribute name="createUser" type="s:string" />
+        <s:attribute name="createDatetime" type="s:string" />
+        <s:attribute name="modifiedUser" type="s:string" />
+        <s:attribute name="modifiedDatetime" type="s:string" />
+        <s:attribute name="typeId" type="s:string" />
+        <s:attribute name="typeName" type="s:string" />
+        <s:attribute name="UUID" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfIBAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IBAttribute" nillable="true" type="tns:IBAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="IBAttribute">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:attribute name="id" type="s:string" />
+            <s:attribute name="parentId" type="s:string" />
+            <s:attribute name="name" type="s:string" />
+            <s:attribute name="value" type="s:string" />
+            <s:attribute name="valueType" type="s:string" />
+            <s:attribute name="createDatetime" type="s:string" />
+            <s:attribute name="createUser" type="s:string" />
+            <s:attribute name="modifiedDatetime" type="s:string" />
+            <s:attribute name="modifiedUser" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EntityBase" abstract="true" />
+      <s:complexType name="ContentVersionComment">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="commentText" type="s:string" />
+            </s:sequence>
+            <s:attribute name="id" type="s:string" />
+            <s:attribute name="contentVersionId" type="s:string" />
+            <s:attribute name="commentId" type="s:string" />
+            <s:attribute name="source" type="s:string" />
+            <s:attribute name="uctTimeStamp" type="s:dateTime" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="IBBinary">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="data" type="s:base64Binary" />
+            </s:sequence>
+            <s:attribute name="id" type="s:string" />
+            <s:attribute name="binaryId" type="s:string" />
+            <s:attribute name="parentId" type="s:string" />
+            <s:attribute name="label" type="s:string" />
+            <s:attribute name="name" type="s:string" />
+            <s:attribute name="type" type="s:string" />
+            <s:attribute name="method" type="s:string" />
+            <s:attribute name="hash" type="s:string" />
+            <s:attribute name="sizeInBytes" type="s:int" use="required" />
+            <s:attribute name="createDatetime" type="s:string" />
+            <s:attribute name="createUser" type="s:string" />
+            <s:attribute name="modifiedDatetime" type="s:string" />
+            <s:attribute name="modifiedUser" type="s:string" />
+            <s:attribute name="isEncrypted" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfIBBinary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="IBBinary" nillable="true" type="tns:IBBinary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContentVersionComment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContentVersionComment" nillable="true" type="tns:ContentVersionComment" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CopyExamForm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newExamFormCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyExamFormResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CopyExamFormResult" type="tns:ExamForm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ExamForm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="attributes" type="tns:ArrayOfIBAttribute1" />
+          <s:element minOccurs="0" maxOccurs="1" name="comments" type="tns:ArrayOfContentVersionComment1" />
+          <s:element minOccurs="1" maxOccurs="1" name="siblingOrderIndex" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Restartable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SkipAllowed" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="BeginSection" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EndSection" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PassingPercent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExamTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DefaultItemWeight" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemListUUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateSetBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateSetOn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LineOfBusiness" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NumberOfItems" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstimatedDifficulty" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceExamFormId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BuildingBlock" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AlternateFormNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReplacedForms" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="LoginAttempts" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TimerDelay" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PasswordLabel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginPrompt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IncorrectLoginPrompt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PasswordScript" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LogPassword" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReportPlugins" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultPlugins" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="HelmPlugin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ScoringPlugin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimerPlugin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OveralFormTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormEffectiveDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FormExpirationDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="folderId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestStatsBeginDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="requestStatsEndDate" type="s:string" />
+        </s:sequence>
+        <s:attribute name="isLocked" type="s:boolean" use="required" />
+        <s:attribute name="createUser" type="s:string" />
+        <s:attribute name="createDatetime" type="s:string" />
+        <s:attribute name="modifiedUser" type="s:string" />
+        <s:attribute name="modifiedDatetime" type="s:string" />
+        <s:attribute name="UUID" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="description" type="s:string" />
+        <s:attribute name="language" type="s:string" />
+        <s:attribute name="OwnerId" type="s:string" />
+        <s:attribute name="revision" type="s:string" />
+        <s:attribute name="version" type="s:float" use="required" />
+        <s:attribute name="typeId" type="s:string" />
+        <s:attribute name="typeName" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfIBAttribute1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="attribute" nillable="true" type="tns:IBAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContentVersionComment1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="comment" nillable="true" type="tns:ContentVersionComment" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CopyEquatorExamForm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uuid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newExamFormCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyEquatorExamFormResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CopyEquatorExamFormResult" type="tns:ExamForm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadExam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strExamId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadExamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadExamResult" type="tns:Exam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveExam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="objExam" type="tns:Exam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveExamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveExamResult" type="tns:Exam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteExam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteExamResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LoadExamForm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadExamFormResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadExamFormResult" type="tns:ExamForm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveExamForm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="objExamForm" type="tns:ExamForm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveExamFormResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveExamFormResult" type="tns:ExamForm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadExamFormList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="uuid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadExamFormListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadExamFormListResult" type="tns:ArrayOfExamForm" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfExamForm">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExamForm" nillable="true" type="tns:ExamForm" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DeleteExamForm">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteExamFormResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetItemListKeyDistribution">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemListUUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemListKeyDistributionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemListKeyDistributionResult" type="tns:ArrayOfNameValuePair" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfNameValuePair">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="NameValuePair" nillable="true" type="tns:NameValuePair" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ContentOutline" nillable="true" type="tns:ContentOutline" />
+      <s:element name="ContentOutlineDomain" nillable="true" type="tns:ContentOutlineDomain" />
+      <s:element name="ArrayOfContentOutlineDomain" nillable="true" type="tns:ArrayOfContentOutlineDomain" />
+      <s:element name="ArrayOfCODItemCount" nillable="true" type="tns:ArrayOfCODItemCount" />
+      <s:element name="Exam" nillable="true" type="tns:Exam" />
+      <s:element name="ExamForm" nillable="true" type="tns:ExamForm" />
+      <s:element name="ArrayOfExamForm" nillable="true" type="tns:ArrayOfExamForm" />
+      <s:element name="ArrayOfNameValuePair" nillable="true" type="tns:ArrayOfNameValuePair" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DeleteContentOutlineDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteContentOutlineDomain" />
+  </wsdl:message>
+  <wsdl:message name="DeleteContentOutlineDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteContentOutlineDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteContentOutlineDomainuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadContentOutline" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadContentOutlineResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadContentOutlineDomain" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadContentOutlineDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainListSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadContentOutlineDomainList" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainListSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadContentOutlineDomainListResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SaveContentOutlineDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveContentOutlineDomain" />
+  </wsdl:message>
+  <wsdl:message name="SaveContentOutlineDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveContentOutlineDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveContentOutlineDomainuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContentOutlineDomainItemCount" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContentOutlineDomainItemCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCountuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCount2SoapIn">
+    <wsdl:part name="parameters" element="tns:GetContentOutlineDomainItemCount2" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCount2SoapOut">
+    <wsdl:part name="parameters" element="tns:GetContentOutlineDomainItemCount2Response" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCount2user">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CloneExamSoapIn">
+    <wsdl:part name="parameters" element="tns:CloneExam" />
+  </wsdl:message>
+  <wsdl:message name="CloneExamSoapOut">
+    <wsdl:part name="parameters" element="tns:CloneExamResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloneExamuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CopyExamFormSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyExamForm" />
+  </wsdl:message>
+  <wsdl:message name="CopyExamFormSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyExamFormResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyExamFormuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CopyEquatorExamFormSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyEquatorExamForm" />
+  </wsdl:message>
+  <wsdl:message name="CopyEquatorExamFormSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyEquatorExamFormResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyEquatorExamFormuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadExam" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadExamResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SaveExamSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveExam" />
+  </wsdl:message>
+  <wsdl:message name="SaveExamSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveExamResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveExamuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteExam" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteExamResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadExamForm" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadExamFormResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SaveExamFormSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveExamForm" />
+  </wsdl:message>
+  <wsdl:message name="SaveExamFormSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveExamFormResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveExamFormuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormListSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadExamFormList" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormListSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadExamFormListResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamFormSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteExamForm" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamFormSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteExamFormResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamFormuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetItemListKeyDistributionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemListKeyDistribution" />
+  </wsdl:message>
+  <wsdl:message name="GetItemListKeyDistributionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemListKeyDistributionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemListKeyDistributionuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteContentOutlineDomainHttpGetIn">
+    <wsdl:part name="UUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteContentOutlineDomainHttpGetOut" />
+  <wsdl:message name="LoadContentOutlineHttpGetIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineHttpGetOut">
+    <wsdl:part name="Body" element="tns:ContentOutline" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainHttpGetIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainHttpGetOut">
+    <wsdl:part name="Body" element="tns:ContentOutlineDomain" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainListHttpGetIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfContentOutlineDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCountHttpGetIn">
+    <wsdl:part name="contentOutlineDomainRootUUID" type="s:string" />
+    <wsdl:part name="itemListUUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCountHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCODItemCount" />
+  </wsdl:message>
+  <wsdl:message name="CloneExamHttpGetIn">
+    <wsdl:part name="UUID" type="s:string" />
+    <wsdl:part name="newExamCode" type="s:string" />
+    <wsdl:part name="strFolderId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CloneExamHttpGetOut">
+    <wsdl:part name="Body" element="tns:Exam" />
+  </wsdl:message>
+  <wsdl:message name="CopyExamFormHttpGetIn">
+    <wsdl:part name="uuid" type="s:string" />
+    <wsdl:part name="newExamFormCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyExamFormHttpGetOut">
+    <wsdl:part name="Body" element="tns:ExamForm" />
+  </wsdl:message>
+  <wsdl:message name="CopyEquatorExamFormHttpGetIn">
+    <wsdl:part name="uuid" type="s:string" />
+    <wsdl:part name="newExamFormCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyEquatorExamFormHttpGetOut">
+    <wsdl:part name="Body" element="tns:ExamForm" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamHttpGetIn">
+    <wsdl:part name="strExamId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamHttpGetOut">
+    <wsdl:part name="Body" element="tns:Exam" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamHttpGetIn">
+    <wsdl:part name="UUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamHttpGetOut" />
+  <wsdl:message name="LoadExamFormHttpGetIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormHttpGetOut">
+    <wsdl:part name="Body" element="tns:ExamForm" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormListHttpGetIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfExamForm" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamFormHttpGetIn">
+    <wsdl:part name="UUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamFormHttpGetOut" />
+  <wsdl:message name="GetItemListKeyDistributionHttpGetIn">
+    <wsdl:part name="itemListUUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetItemListKeyDistributionHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfNameValuePair" />
+  </wsdl:message>
+  <wsdl:message name="DeleteContentOutlineDomainHttpPostIn">
+    <wsdl:part name="UUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteContentOutlineDomainHttpPostOut" />
+  <wsdl:message name="LoadContentOutlineHttpPostIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineHttpPostOut">
+    <wsdl:part name="Body" element="tns:ContentOutline" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainHttpPostIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainHttpPostOut">
+    <wsdl:part name="Body" element="tns:ContentOutlineDomain" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainListHttpPostIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadContentOutlineDomainListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfContentOutlineDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCountHttpPostIn">
+    <wsdl:part name="contentOutlineDomainRootUUID" type="s:string" />
+    <wsdl:part name="itemListUUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetContentOutlineDomainItemCountHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfCODItemCount" />
+  </wsdl:message>
+  <wsdl:message name="CloneExamHttpPostIn">
+    <wsdl:part name="UUID" type="s:string" />
+    <wsdl:part name="newExamCode" type="s:string" />
+    <wsdl:part name="strFolderId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CloneExamHttpPostOut">
+    <wsdl:part name="Body" element="tns:Exam" />
+  </wsdl:message>
+  <wsdl:message name="CopyExamFormHttpPostIn">
+    <wsdl:part name="uuid" type="s:string" />
+    <wsdl:part name="newExamFormCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyExamFormHttpPostOut">
+    <wsdl:part name="Body" element="tns:ExamForm" />
+  </wsdl:message>
+  <wsdl:message name="CopyEquatorExamFormHttpPostIn">
+    <wsdl:part name="uuid" type="s:string" />
+    <wsdl:part name="newExamFormCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyEquatorExamFormHttpPostOut">
+    <wsdl:part name="Body" element="tns:ExamForm" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamHttpPostIn">
+    <wsdl:part name="strExamId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamHttpPostOut">
+    <wsdl:part name="Body" element="tns:Exam" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamHttpPostIn">
+    <wsdl:part name="UUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamHttpPostOut" />
+  <wsdl:message name="LoadExamFormHttpPostIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormHttpPostOut">
+    <wsdl:part name="Body" element="tns:ExamForm" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormListHttpPostIn">
+    <wsdl:part name="uuid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadExamFormListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfExamForm" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamFormHttpPostIn">
+    <wsdl:part name="UUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExamFormHttpPostOut" />
+  <wsdl:message name="GetItemListKeyDistributionHttpPostIn">
+    <wsdl:part name="itemListUUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetItemListKeyDistributionHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfNameValuePair" />
+  </wsdl:message>
+  <wsdl:portType name="ExamServiceSoap">
+    <wsdl:operation name="DeleteContentOutlineDomain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes the ContentOutlineDomain by UUID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteContentOutlineDomainSoapIn" />
+      <wsdl:output message="tns:DeleteContentOutlineDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutline">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ContentOutlineDomain.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineSoapIn" />
+      <wsdl:output message="tns:LoadContentOutlineSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ContentOutlineDomain.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineDomainSoapIn" />
+      <wsdl:output message="tns:LoadContentOutlineDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomainList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves all ContentOutlineDomain children of the specified uuid.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineDomainListSoapIn" />
+      <wsdl:output message="tns:LoadContentOutlineDomainListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveContentOutlineDomain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Persist a single ContentOutlineDomain object.</wsdl:documentation>
+      <wsdl:input message="tns:SaveContentOutlineDomainSoapIn" />
+      <wsdl:output message="tns:SaveContentOutlineDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the number of items required and placed on a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetContentOutlineDomainItemCountSoapIn" />
+      <wsdl:output message="tns:GetContentOutlineDomainItemCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the number of items required and placed on a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetContentOutlineDomainItemCount2SoapIn" />
+      <wsdl:output message="tns:GetContentOutlineDomainItemCount2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloneExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clones the exam.</wsdl:documentation>
+      <wsdl:input message="tns:CloneExamSoapIn" />
+      <wsdl:output message="tns:CloneExamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an exam form and its list of item references.</wsdl:documentation>
+      <wsdl:input message="tns:CopyExamFormSoapIn" />
+      <wsdl:output message="tns:CopyExamFormSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyEquatorExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an exam form and its list of item references.</wsdl:documentation>
+      <wsdl:input message="tns:CopyEquatorExamFormSoapIn" />
+      <wsdl:output message="tns:CopyEquatorExamFormSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an exam by UUID.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamSoapIn" />
+      <wsdl:output message="tns:LoadExamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Saves an exam object.</wsdl:documentation>
+      <wsdl:input message="tns:SaveExamSoapIn" />
+      <wsdl:output message="tns:SaveExamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an exam using the exam form's ID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExamSoapIn" />
+      <wsdl:output message="tns:DeleteExamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an exam form.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamFormSoapIn" />
+      <wsdl:output message="tns:LoadExamFormSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Saves an exam form.</wsdl:documentation>
+      <wsdl:input message="tns:SaveExamFormSoapIn" />
+      <wsdl:output message="tns:SaveExamFormSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamFormList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads a list of ExamForm children of an exam.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamFormListSoapIn" />
+      <wsdl:output message="tns:LoadExamFormListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an exam form using the exam form's ID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExamFormSoapIn" />
+      <wsdl:output message="tns:DeleteExamFormSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemListKeyDistribution">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the count of each key found on items on a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetItemListKeyDistributionSoapIn" />
+      <wsdl:output message="tns:GetItemListKeyDistributionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ExamServiceHttpGet">
+    <wsdl:operation name="DeleteContentOutlineDomain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes the ContentOutlineDomain by UUID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteContentOutlineDomainHttpGetIn" />
+      <wsdl:output message="tns:DeleteContentOutlineDomainHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutline">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ContentOutlineDomain.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineHttpGetIn" />
+      <wsdl:output message="tns:LoadContentOutlineHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ContentOutlineDomain.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineDomainHttpGetIn" />
+      <wsdl:output message="tns:LoadContentOutlineDomainHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomainList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves all ContentOutlineDomain children of the specified uuid.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineDomainListHttpGetIn" />
+      <wsdl:output message="tns:LoadContentOutlineDomainListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the number of items required and placed on a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetContentOutlineDomainItemCountHttpGetIn" />
+      <wsdl:output message="tns:GetContentOutlineDomainItemCountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloneExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clones the exam.</wsdl:documentation>
+      <wsdl:input message="tns:CloneExamHttpGetIn" />
+      <wsdl:output message="tns:CloneExamHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an exam form and its list of item references.</wsdl:documentation>
+      <wsdl:input message="tns:CopyExamFormHttpGetIn" />
+      <wsdl:output message="tns:CopyExamFormHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyEquatorExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an exam form and its list of item references.</wsdl:documentation>
+      <wsdl:input message="tns:CopyEquatorExamFormHttpGetIn" />
+      <wsdl:output message="tns:CopyEquatorExamFormHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an exam by UUID.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamHttpGetIn" />
+      <wsdl:output message="tns:LoadExamHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an exam using the exam form's ID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExamHttpGetIn" />
+      <wsdl:output message="tns:DeleteExamHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an exam form.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamFormHttpGetIn" />
+      <wsdl:output message="tns:LoadExamFormHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamFormList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads a list of ExamForm children of an exam.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamFormListHttpGetIn" />
+      <wsdl:output message="tns:LoadExamFormListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an exam form using the exam form's ID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExamFormHttpGetIn" />
+      <wsdl:output message="tns:DeleteExamFormHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemListKeyDistribution">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the count of each key found on items on a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetItemListKeyDistributionHttpGetIn" />
+      <wsdl:output message="tns:GetItemListKeyDistributionHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ExamServiceHttpPost">
+    <wsdl:operation name="DeleteContentOutlineDomain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes the ContentOutlineDomain by UUID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteContentOutlineDomainHttpPostIn" />
+      <wsdl:output message="tns:DeleteContentOutlineDomainHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutline">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ContentOutlineDomain.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineHttpPostIn" />
+      <wsdl:output message="tns:LoadContentOutlineHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ContentOutlineDomain.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineDomainHttpPostIn" />
+      <wsdl:output message="tns:LoadContentOutlineDomainHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomainList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves all ContentOutlineDomain children of the specified uuid.</wsdl:documentation>
+      <wsdl:input message="tns:LoadContentOutlineDomainListHttpPostIn" />
+      <wsdl:output message="tns:LoadContentOutlineDomainListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the number of items required and placed on a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetContentOutlineDomainItemCountHttpPostIn" />
+      <wsdl:output message="tns:GetContentOutlineDomainItemCountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CloneExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clones the exam.</wsdl:documentation>
+      <wsdl:input message="tns:CloneExamHttpPostIn" />
+      <wsdl:output message="tns:CloneExamHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an exam form and its list of item references.</wsdl:documentation>
+      <wsdl:input message="tns:CopyExamFormHttpPostIn" />
+      <wsdl:output message="tns:CopyExamFormHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyEquatorExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an exam form and its list of item references.</wsdl:documentation>
+      <wsdl:input message="tns:CopyEquatorExamFormHttpPostIn" />
+      <wsdl:output message="tns:CopyEquatorExamFormHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an exam by UUID.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamHttpPostIn" />
+      <wsdl:output message="tns:LoadExamHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an exam using the exam form's ID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExamHttpPostIn" />
+      <wsdl:output message="tns:DeleteExamHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an exam form.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamFormHttpPostIn" />
+      <wsdl:output message="tns:LoadExamFormHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamFormList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads a list of ExamForm children of an exam.</wsdl:documentation>
+      <wsdl:input message="tns:LoadExamFormListHttpPostIn" />
+      <wsdl:output message="tns:LoadExamFormListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExamForm">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an exam form using the exam form's ID.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExamFormHttpPostIn" />
+      <wsdl:output message="tns:DeleteExamFormHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemListKeyDistribution">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the count of each key found on items on a list.</wsdl:documentation>
+      <wsdl:input message="tns:GetItemListKeyDistributionHttpPostIn" />
+      <wsdl:output message="tns:GetItemListKeyDistributionHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ExamServiceSoap" type="tns:ExamServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DeleteContentOutlineDomain">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteContentOutlineDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteContentOutlineDomainuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutline">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadContentOutline" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadContentOutlineuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomain">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadContentOutlineDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadContentOutlineDomainuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomainList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadContentOutlineDomainList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadContentOutlineDomainListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveContentOutlineDomain">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveContentOutlineDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SaveContentOutlineDomainuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContentOutlineDomainItemCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetContentOutlineDomainItemCountuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount2">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContentOutlineDomainItemCount2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetContentOutlineDomainItemCount2user" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloneExam">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CloneExam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CloneExamuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyExamForm">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyExamForm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CopyExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyEquatorExamForm">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyEquatorExamForm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CopyEquatorExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExam">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadExam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadExamuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExam">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveExam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SaveExamuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExam">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteExam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteExamuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamForm">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadExamForm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExamForm">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveExamForm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SaveExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamFormList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadExamFormList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadExamFormListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExamForm">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteExamForm" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemListKeyDistribution">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetItemListKeyDistribution" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetItemListKeyDistributionuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ExamServiceSoap12" type="tns:ExamServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DeleteContentOutlineDomain">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteContentOutlineDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteContentOutlineDomainuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutline">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadContentOutline" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadContentOutlineuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomain">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadContentOutlineDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadContentOutlineDomainuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomainList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadContentOutlineDomainList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadContentOutlineDomainListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveContentOutlineDomain">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveContentOutlineDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SaveContentOutlineDomainuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContentOutlineDomainItemCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetContentOutlineDomainItemCountuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount2">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContentOutlineDomainItemCount2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetContentOutlineDomainItemCount2user" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloneExam">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CloneExam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CloneExamuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyExamForm">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyExamForm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CopyExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyEquatorExamForm">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyEquatorExamForm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CopyEquatorExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExam">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadExam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadExamuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExam">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveExam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SaveExamuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExam">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteExam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteExamuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamForm">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadExamForm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExamForm">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveExamForm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SaveExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamFormList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadExamFormList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadExamFormListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExamForm">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteExamForm" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteExamFormuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemListKeyDistribution">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetItemListKeyDistribution" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetItemListKeyDistributionuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ExamServiceHttpGet" type="tns:ExamServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DeleteContentOutlineDomain">
+      <http:operation location="/DeleteContentOutlineDomain" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutline">
+      <http:operation location="/LoadContentOutline" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomain">
+      <http:operation location="/LoadContentOutlineDomain" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomainList">
+      <http:operation location="/LoadContentOutlineDomainList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount">
+      <http:operation location="/GetContentOutlineDomainItemCount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloneExam">
+      <http:operation location="/CloneExam" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyExamForm">
+      <http:operation location="/CopyExamForm" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyEquatorExamForm">
+      <http:operation location="/CopyEquatorExamForm" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExam">
+      <http:operation location="/LoadExam" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExam">
+      <http:operation location="/DeleteExam" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamForm">
+      <http:operation location="/LoadExamForm" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamFormList">
+      <http:operation location="/LoadExamFormList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExamForm">
+      <http:operation location="/DeleteExamForm" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemListKeyDistribution">
+      <http:operation location="/GetItemListKeyDistribution" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ExamServiceHttpPost" type="tns:ExamServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DeleteContentOutlineDomain">
+      <http:operation location="/DeleteContentOutlineDomain" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutline">
+      <http:operation location="/LoadContentOutline" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomain">
+      <http:operation location="/LoadContentOutlineDomain" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadContentOutlineDomainList">
+      <http:operation location="/LoadContentOutlineDomainList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentOutlineDomainItemCount">
+      <http:operation location="/GetContentOutlineDomainItemCount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloneExam">
+      <http:operation location="/CloneExam" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyExamForm">
+      <http:operation location="/CopyExamForm" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyEquatorExamForm">
+      <http:operation location="/CopyEquatorExamForm" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExam">
+      <http:operation location="/LoadExam" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExam">
+      <http:operation location="/DeleteExam" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamForm">
+      <http:operation location="/LoadExamForm" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExamFormList">
+      <http:operation location="/LoadExamFormList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExamForm">
+      <http:operation location="/DeleteExamForm" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemListKeyDistribution">
+      <http:operation location="/GetItemListKeyDistribution" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExamService">
+    <wsdl:port name="ExamServiceSoap" binding="tns:ExamServiceSoap">
+      <soap:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ExamService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ExamServiceSoap12" binding="tns:ExamServiceSoap12">
+      <soap12:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ExamService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ExamServiceHttpGet" binding="tns:ExamServiceHttpGet">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ExamService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ExamServiceHttpPost" binding="tns:ExamServiceHttpPost">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ExamService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

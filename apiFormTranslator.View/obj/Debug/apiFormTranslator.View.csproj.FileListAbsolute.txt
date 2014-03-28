@@ -1,0 +1,5 @@
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.View\bin\Debug\apiFormTranslator.View.dll
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.View\bin\Debug\apiFormTranslator.View.pdb
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.View\obj\Debug\apiFormTranslator.View.dll
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.View\obj\Debug\apiFormTranslator.View.pdb
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.View\obj\Debug\apiFormTranslator.View.csprojResolveAssemblyReference.cache

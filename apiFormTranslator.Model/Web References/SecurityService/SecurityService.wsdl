@@ -1,0 +1,3853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.prometric.com/webservices/intelitest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://www.prometric.com/webservices/intelitest/AbstractTypes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.prometric.com/webservices/intelitest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Web methods for dealing with security related calls</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.prometric.com/webservices/intelitest">
+      <s:element name="CreateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" nillable="true" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="User">
+        <s:attribute name="currentContextId" type="s:string" />
+        <s:attribute name="userName" type="s:string" />
+        <s:attribute name="userId" type="s:string" />
+        <s:attribute name="authenticated" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:element name="user" type="tns:User" />
+      <s:element name="AuthenticateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AuthenticateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" nillable="true" type="tns:User" />
+            <s:element minOccurs="1" maxOccurs="1" name="passwordExpiringSoon" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="passwordWillExpireInDays" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserToContext">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contextId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserToContextResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPasswordComplexity">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPasswordComplexityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPasswordComplexityResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="minRequiredNonalphanumericCharacters" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="minRequiredPasswordLength" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPasswordComplexityValid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsPasswordComplexityValidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsPasswordComplexityValidResult" type="tns:PasswordComplexity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="PasswordComplexity">
+        <s:list>
+          <s:simpleType>
+            <s:restriction base="s:string">
+              <s:enumeration value="Passed" />
+              <s:enumeration value="NotLongEnough" />
+              <s:enumeration value="NotEnoughNonAlpha" />
+              <s:enumeration value="FailedRegex" />
+            </s:restriction>
+          </s:simpleType>
+        </s:list>
+      </s:simpleType>
+      <s:element name="ChangePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="oldPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangePasswordResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserContexts">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUserContextsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserContextsResult" type="tns:ArrayOfContext" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfContext">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Context" nillable="true" type="tns:Context" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Context">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Folder">
+            <s:attribute name="contextId" type="s:string" />
+            <s:attribute name="contextName" type="s:string" />
+            <s:attribute name="statisticsUser" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Folder">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FolderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FolderId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FolderTypeId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FolderTypeName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsLocked" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsHidden" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSystem" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="utcCreateDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="utcLockedDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="utcModifiedDateTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedUser" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllContexts">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllContextsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllContextsResult" type="tns:ArrayOfContext" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserNameMatchesEmailAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserNameMatchesEmailAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserNameMatchesEmailAddressResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendPasswordResetEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IPAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResetPageUri" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendPasswordResetEmailResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsValidResetUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TokenQuery" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsValidResetUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsValidResetUrlResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserNameMatchesSecurityToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TokenQuery" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserNameMatchesSecurityTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserNameMatchesSecurityTokenResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CleanContext">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="contextName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contextID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsSoftDelete" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CleanContextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CleanContextResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsLockedOut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" nillable="true" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsLockedOutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsLockedOutResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnlockUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" nillable="true" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UnlockUserResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SapUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" nillable="true" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SapUserResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ResetUserPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" nillable="true" type="tns:User" />
+            <s:element minOccurs="0" maxOccurs="1" name="newPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ResetUserPasswordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SecureResetUserPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ResetToken" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SecureResetUserPasswordResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUserList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUserListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserListResult" type="tns:ArrayOfUserWithDemographics" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserWithDemographics">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserWithDemographics" nillable="true" type="tns:UserWithDemographics" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserWithDemographics">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="User" type="tns:User" />
+          <s:element minOccurs="0" maxOccurs="1" name="Demographics" type="tns:ArrayOfUserDemographic" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserDemographic">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserDemographic" nillable="true" type="tns:UserDemographic" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserDemographic">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:FolderAttribute">
+            <s:attribute name="userDemographicId" type="s:string" />
+            <s:attribute name="demographicName" type="s:string" />
+            <s:attribute name="userId" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FolderAttribute">
+        <s:attribute name="FolderAttributeId" type="s:string" />
+        <s:attribute name="FolderId" type="s:string" />
+        <s:attribute name="Attribute" type="s:string" />
+        <s:attribute name="Value" type="s:string" />
+        <s:attribute name="CreateUser" type="s:string" />
+        <s:attribute name="ModifiedUser" type="s:string" />
+      </s:complexType>
+      <s:element name="GetGlobalUserList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetGlobalUserListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGlobalUserListResult" type="tns:ArrayOfUserWithDemographics" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserListGivenRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserListGivenRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserListGivenRoleResult" type="tns:ArrayOfUserWithDemographics" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateContext">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="contextNameToGenerate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contentFolderName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ICSFolderName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateContextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GenerateContextResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateUserInContext">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contextName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateUserInContextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GenerateUserInContextResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUsersToContext">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserNames" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="contextName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddUsersToContextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUsersToContextResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserFromContext">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contextName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserFromContextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteUserFromContextResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="updatedDemographics" type="tns:ArrayOfKeyValuePairSerializable" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfKeyValuePairSerializable">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="KeyValuePairSerializable" nillable="true" type="tns:KeyValuePairSerializable" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="KeyValuePairSerializable">
+        <s:attribute name="Key" type="s:string" />
+        <s:attribute name="Value" type="s:string" />
+      </s:complexType>
+      <s:element name="UpdateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocationRoles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="locationId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocationRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLocationRolesResult" type="tns:ArrayOfRole" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRole">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Role" nillable="true" type="tns:Role" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Role">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RoleName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="roleFolder" type="tns:Folder" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoleId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Attributes" type="tns:ArrayOfFolderAttribute" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsFolderRole" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFolderAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FolderAttribute" nillable="true" type="tns:FolderAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLocationRolesIncludingInherited">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="locationId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLocationRolesIncludingInheritedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLocationRolesIncludingInheritedResult" type="tns:ArrayOfRole" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRolePermissions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRolePermissionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRolePermissionsResult" type="tns:ArrayOfPermissionDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPermissionDefinition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PermissionDefinition" nillable="true" type="tns:PermissionDefinition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PermissionDefinition">
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="UUID" type="s:string" />
+        <s:attribute name="permissionType" type="s:string" />
+        <s:attribute name="objectType" type="s:string" />
+        <s:attribute name="description" type="s:string" />
+        <s:attribute name="createdOn" type="s:string" />
+        <s:attribute name="createdBy" type="s:string" />
+        <s:attribute name="updatedOn" type="s:string" />
+        <s:attribute name="updatedBy" type="s:string" />
+        <s:attribute name="displayOrdinal" type="s:int" use="required" />
+        <s:attribute name="requiredInd" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:element name="GetUserPermissionsAtLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" nillable="true" type="tns:User" />
+            <s:element minOccurs="0" maxOccurs="1" name="locationId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserPermissionsAtLocationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserPermissionsAtLocationResult" type="tns:ArrayOfPermissionDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserPermissionsForNonFolders">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" nillable="true" type="tns:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserPermissionsForNonFoldersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserPermissionsForNonFoldersResult" type="tns:ArrayOfPermissionDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateFolderRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateFolderRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateFolderRoleResult" type="tns:Role" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateNonFolderRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateNonFolderRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateNonFolderRoleResult" type="tns:Role" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateContextAdminRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateContextAdminRoleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateContextAdminRoleResult" type="tns:Role" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetRolePermissions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="permissions" type="tns:ArrayOfPermissionDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetRolePermissionsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DeleteRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteRoleResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetContextNonFolderRoles">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetContextNonFolderRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContextNonFolderRolesResult" type="tns:ArrayOfRole" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContextAdminRoles">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetContextAdminRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContextAdminRolesResult" type="tns:ArrayOfRole" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContextFolderRoles">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetContextFolderRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContextFolderRolesResult" type="tns:ArrayOfRole" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssignUserToRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="roleId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssignUserToRoleResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveUserFromRole">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="roleId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserFromRoleResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AssignRoleToLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="locationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="roleId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AssignRoleToLocationResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveRoleFromLocation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="locationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="roleId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveRoleFromLocationResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GeneratePermissionList">
+        <s:complexType />
+      </s:element>
+      <s:element name="GeneratePermissionListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GeneratePermissionListResult" type="tns:ArrayOfPermissionDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetApplicationAdmins">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetApplicationAdminsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetApplicationAdminsResult" type="tns:ArrayOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddUserToApplicationAdmins">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserToApplicationAdminsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveUserFromApplicationAdmins">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserFromApplicationAdminsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="IsUserApplicationAdmin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsUserApplicationAdminResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsUserApplicationAdminResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PasswordComplexity" type="tns:PasswordComplexity" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfContext" nillable="true" type="tns:ArrayOfContext" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfUserWithDemographics" nillable="true" type="tns:ArrayOfUserWithDemographics" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="ArrayOfRole" nillable="true" type="tns:ArrayOfRole" />
+      <s:element name="ArrayOfPermissionDefinition" nillable="true" type="tns:ArrayOfPermissionDefinition" />
+      <s:element name="Role" nillable="true" type="tns:Role" />
+      <s:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+    </s:schema>
+    <s:schema targetNamespace="http://www.prometric.com/webservices/intelitest/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateUser" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateUseruser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:AuthenticateUser" />
+  </wsdl:message>
+  <wsdl:message name="AuthenticateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:AuthenticateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToContextSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserToContext" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToContextSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserToContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToContextuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetPasswordComplexitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetPasswordComplexity" />
+  </wsdl:message>
+  <wsdl:message name="GetPasswordComplexitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetPasswordComplexityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsPasswordComplexityValidSoapIn">
+    <wsdl:part name="parameters" element="tns:IsPasswordComplexityValid" />
+  </wsdl:message>
+  <wsdl:message name="IsPasswordComplexityValidSoapOut">
+    <wsdl:part name="parameters" element="tns:IsPasswordComplexityValidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangePassword" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePassworduser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetUserContextsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserContexts" />
+  </wsdl:message>
+  <wsdl:message name="GetUserContextsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserContextsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserContextsuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetAllContextsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllContexts" />
+  </wsdl:message>
+  <wsdl:message name="GetAllContextsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllContextsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllContextsuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesEmailAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:UserNameMatchesEmailAddress" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesEmailAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:UserNameMatchesEmailAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:SendPasswordResetEmail" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:SendPasswordResetEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsValidResetUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:IsValidResetUrl" />
+  </wsdl:message>
+  <wsdl:message name="IsValidResetUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:IsValidResetUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesSecurityTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:UserNameMatchesSecurityToken" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesSecurityTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:UserNameMatchesSecurityTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="CleanContextSoapIn">
+    <wsdl:part name="parameters" element="tns:CleanContext" />
+  </wsdl:message>
+  <wsdl:message name="CleanContextSoapOut">
+    <wsdl:part name="parameters" element="tns:CleanContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="CleanContextuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="IsLockedOutSoapIn">
+    <wsdl:part name="parameters" element="tns:IsLockedOut" />
+  </wsdl:message>
+  <wsdl:message name="IsLockedOutSoapOut">
+    <wsdl:part name="parameters" element="tns:IsLockedOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsLockedOutuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="UnlockUserSoapIn">
+    <wsdl:part name="parameters" element="tns:UnlockUser" />
+  </wsdl:message>
+  <wsdl:message name="UnlockUserSoapOut">
+    <wsdl:part name="parameters" element="tns:UnlockUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="UnlockUseruser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SapUserSoapIn">
+    <wsdl:part name="parameters" element="tns:SapUser" />
+  </wsdl:message>
+  <wsdl:message name="SapUserSoapOut">
+    <wsdl:part name="parameters" element="tns:SapUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="SapUseruser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ResetUserPassword" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ResetUserPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ResetUserPassworduser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SecureResetUserPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:SecureResetUserPassword" />
+  </wsdl:message>
+  <wsdl:message name="SecureResetUserPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:SecureResetUserPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserList" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetGlobalUserListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGlobalUserList" />
+  </wsdl:message>
+  <wsdl:message name="GetGlobalUserListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGlobalUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGlobalUserListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListGivenRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserListGivenRole" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListGivenRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserListGivenRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListGivenRoleuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GenerateContextSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateContext" />
+  </wsdl:message>
+  <wsdl:message name="GenerateContextSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateContextuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GenerateUserInContextSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateUserInContext" />
+  </wsdl:message>
+  <wsdl:message name="GenerateUserInContextSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateUserInContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateUserInContextuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AddUsersToContextSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUsersToContext" />
+  </wsdl:message>
+  <wsdl:message name="AddUsersToContextSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUsersToContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUsersToContextuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserFromContextSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteUserFromContext" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserFromContextSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteUserFromContextResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserFromContextuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUseruser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLocationRoles" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLocationRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesIncludingInheritedSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLocationRolesIncludingInherited" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesIncludingInheritedSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLocationRolesIncludingInheritedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesIncludingInheriteduser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetRolePermissionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRolePermissions" />
+  </wsdl:message>
+  <wsdl:message name="GetRolePermissionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRolePermissionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRolePermissionsuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPermissionsAtLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserPermissionsAtLocation" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPermissionsAtLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserPermissionsAtLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPermissionsAtLocationuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPermissionsForNonFoldersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserPermissionsForNonFolders" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPermissionsForNonFoldersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserPermissionsForNonFoldersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPermissionsForNonFoldersuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CreateFolderRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateFolderRole" />
+  </wsdl:message>
+  <wsdl:message name="CreateFolderRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateFolderRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateFolderRoleuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CreateNonFolderRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateNonFolderRole" />
+  </wsdl:message>
+  <wsdl:message name="CreateNonFolderRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateNonFolderRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateNonFolderRoleuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CreateContextAdminRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateContextAdminRole" />
+  </wsdl:message>
+  <wsdl:message name="CreateContextAdminRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateContextAdminRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateContextAdminRoleuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SetRolePermissionsSoapIn">
+    <wsdl:part name="parameters" element="tns:SetRolePermissions" />
+  </wsdl:message>
+  <wsdl:message name="SetRolePermissionsSoapOut">
+    <wsdl:part name="parameters" element="tns:SetRolePermissionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetRolePermissionsuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteRole" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetContextNonFolderRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContextNonFolderRoles" />
+  </wsdl:message>
+  <wsdl:message name="GetContextNonFolderRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContextNonFolderRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContextNonFolderRolesuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetContextAdminRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContextAdminRoles" />
+  </wsdl:message>
+  <wsdl:message name="GetContextAdminRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContextAdminRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContextAdminRolesuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetContextFolderRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContextFolderRoles" />
+  </wsdl:message>
+  <wsdl:message name="GetContextFolderRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContextFolderRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContextFolderRolesuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AssignUserToRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:AssignUserToRole" />
+  </wsdl:message>
+  <wsdl:message name="AssignUserToRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:AssignUserToRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssignUserToRoleuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromRoleSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromRole" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromRoleSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromRoleuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AssignRoleToLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:AssignRoleToLocation" />
+  </wsdl:message>
+  <wsdl:message name="AssignRoleToLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:AssignRoleToLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="AssignRoleToLocationuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="RemoveRoleFromLocationSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveRoleFromLocation" />
+  </wsdl:message>
+  <wsdl:message name="RemoveRoleFromLocationSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveRoleFromLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveRoleFromLocationuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GeneratePermissionListSoapIn">
+    <wsdl:part name="parameters" element="tns:GeneratePermissionList" />
+  </wsdl:message>
+  <wsdl:message name="GeneratePermissionListSoapOut">
+    <wsdl:part name="parameters" element="tns:GeneratePermissionListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GeneratePermissionListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationAdminsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetApplicationAdmins" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationAdminsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetApplicationAdminsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationAdminsuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToApplicationAdminsSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserToApplicationAdmins" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToApplicationAdminsSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserToApplicationAdminsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToApplicationAdminsuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromApplicationAdminsSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromApplicationAdmins" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromApplicationAdminsSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromApplicationAdminsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromApplicationAdminsuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="IsUserApplicationAdminSoapIn">
+    <wsdl:part name="parameters" element="tns:IsUserApplicationAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IsUserApplicationAdminSoapOut">
+    <wsdl:part name="parameters" element="tns:IsUserApplicationAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsUserApplicationAdminuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserHttpGetIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="firstName" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToContextHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="contextId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToContextHttpGetOut" />
+  <wsdl:message name="IsPasswordComplexityValidHttpGetIn">
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsPasswordComplexityValidHttpGetOut">
+    <wsdl:part name="Body" element="tns:PasswordComplexity" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordHttpGetIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="oldPassword" type="s:string" />
+    <wsdl:part name="newPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserContextsHttpGetIn" />
+  <wsdl:message name="GetUserContextsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfContext" />
+  </wsdl:message>
+  <wsdl:message name="GetAllContextsHttpGetIn" />
+  <wsdl:message name="GetAllContextsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfContext" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesEmailAddressHttpGetIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="email" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesEmailAddressHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="IPAddress" type="s:string" />
+    <wsdl:part name="ResetPageUri" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailHttpGetOut" />
+  <wsdl:message name="IsValidResetUrlHttpGetIn">
+    <wsdl:part name="TokenQuery" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsValidResetUrlHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesSecurityTokenHttpGetIn">
+    <wsdl:part name="TokenQuery" type="s:string" />
+    <wsdl:part name="UserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesSecurityTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CleanContextHttpGetIn">
+    <wsdl:part name="contextName" type="s:string" />
+    <wsdl:part name="contextID" type="s:string" />
+    <wsdl:part name="IsSoftDelete" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CleanContextHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SecureResetUserPasswordHttpGetIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="NewPassword" type="s:string" />
+    <wsdl:part name="ResetToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SecureResetUserPasswordHttpGetOut" />
+  <wsdl:message name="GetUserListHttpGetIn" />
+  <wsdl:message name="GetUserListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUserWithDemographics" />
+  </wsdl:message>
+  <wsdl:message name="GetGlobalUserListHttpGetIn" />
+  <wsdl:message name="GetGlobalUserListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUserWithDemographics" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListGivenRoleHttpGetIn">
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListGivenRoleHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUserWithDemographics" />
+  </wsdl:message>
+  <wsdl:message name="GenerateContextHttpGetIn">
+    <wsdl:part name="contextNameToGenerate" type="s:string" />
+    <wsdl:part name="contentFolderName" type="s:string" />
+    <wsdl:part name="ICSFolderName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateContextHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GenerateUserInContextHttpGetIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="contextName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateUserInContextHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="AddUsersToContextHttpGetIn">
+    <wsdl:part name="UserNames" type="s1:StringArray" />
+    <wsdl:part name="contextName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUsersToContextHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserFromContextHttpGetIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="contextName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserFromContextHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesHttpGetIn">
+    <wsdl:part name="locationId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesIncludingInheritedHttpGetIn">
+    <wsdl:part name="locationId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesIncludingInheritedHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="GetRolePermissionsHttpGetIn">
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRolePermissionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPermissionDefinition" />
+  </wsdl:message>
+  <wsdl:message name="CreateFolderRoleHttpGetIn">
+    <wsdl:part name="roleName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateFolderRoleHttpGetOut">
+    <wsdl:part name="Body" element="tns:Role" />
+  </wsdl:message>
+  <wsdl:message name="CreateNonFolderRoleHttpGetIn">
+    <wsdl:part name="roleName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateNonFolderRoleHttpGetOut">
+    <wsdl:part name="Body" element="tns:Role" />
+  </wsdl:message>
+  <wsdl:message name="CreateContextAdminRoleHttpGetIn">
+    <wsdl:part name="roleName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateContextAdminRoleHttpGetOut">
+    <wsdl:part name="Body" element="tns:Role" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleHttpGetIn">
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleHttpGetOut" />
+  <wsdl:message name="GetContextNonFolderRolesHttpGetIn" />
+  <wsdl:message name="GetContextNonFolderRolesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="GetContextAdminRolesHttpGetIn" />
+  <wsdl:message name="GetContextAdminRolesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="GetContextFolderRolesHttpGetIn" />
+  <wsdl:message name="GetContextFolderRolesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="AssignUserToRoleHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssignUserToRoleHttpGetOut" />
+  <wsdl:message name="RemoveUserFromRoleHttpGetIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromRoleHttpGetOut" />
+  <wsdl:message name="AssignRoleToLocationHttpGetIn">
+    <wsdl:part name="locationId" type="s:string" />
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssignRoleToLocationHttpGetOut" />
+  <wsdl:message name="RemoveRoleFromLocationHttpGetIn">
+    <wsdl:part name="locationId" type="s:string" />
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveRoleFromLocationHttpGetOut" />
+  <wsdl:message name="GeneratePermissionListHttpGetIn" />
+  <wsdl:message name="GeneratePermissionListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPermissionDefinition" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationAdminsHttpGetIn" />
+  <wsdl:message name="GetApplicationAdminsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUser" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToApplicationAdminsHttpGetIn">
+    <wsdl:part name="userName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToApplicationAdminsHttpGetOut" />
+  <wsdl:message name="RemoveUserFromApplicationAdminsHttpGetIn">
+    <wsdl:part name="userName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromApplicationAdminsHttpGetOut" />
+  <wsdl:message name="IsUserApplicationAdminHttpGetIn">
+    <wsdl:part name="userName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsUserApplicationAdminHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserHttpPostIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="email" type="s:string" />
+    <wsdl:part name="firstName" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToContextHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="contextId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToContextHttpPostOut" />
+  <wsdl:message name="IsPasswordComplexityValidHttpPostIn">
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsPasswordComplexityValidHttpPostOut">
+    <wsdl:part name="Body" element="tns:PasswordComplexity" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordHttpPostIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="oldPassword" type="s:string" />
+    <wsdl:part name="newPassword" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserContextsHttpPostIn" />
+  <wsdl:message name="GetUserContextsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfContext" />
+  </wsdl:message>
+  <wsdl:message name="GetAllContextsHttpPostIn" />
+  <wsdl:message name="GetAllContextsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfContext" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesEmailAddressHttpPostIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="email" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesEmailAddressHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="IPAddress" type="s:string" />
+    <wsdl:part name="ResetPageUri" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendPasswordResetEmailHttpPostOut" />
+  <wsdl:message name="IsValidResetUrlHttpPostIn">
+    <wsdl:part name="TokenQuery" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsValidResetUrlHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesSecurityTokenHttpPostIn">
+    <wsdl:part name="TokenQuery" type="s:string" />
+    <wsdl:part name="UserName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserNameMatchesSecurityTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CleanContextHttpPostIn">
+    <wsdl:part name="contextName" type="s:string" />
+    <wsdl:part name="contextID" type="s:string" />
+    <wsdl:part name="IsSoftDelete" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CleanContextHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SecureResetUserPasswordHttpPostIn">
+    <wsdl:part name="UserName" type="s:string" />
+    <wsdl:part name="NewPassword" type="s:string" />
+    <wsdl:part name="ResetToken" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SecureResetUserPasswordHttpPostOut" />
+  <wsdl:message name="GetUserListHttpPostIn" />
+  <wsdl:message name="GetUserListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUserWithDemographics" />
+  </wsdl:message>
+  <wsdl:message name="GetGlobalUserListHttpPostIn" />
+  <wsdl:message name="GetGlobalUserListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUserWithDemographics" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListGivenRoleHttpPostIn">
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserListGivenRoleHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUserWithDemographics" />
+  </wsdl:message>
+  <wsdl:message name="GenerateContextHttpPostIn">
+    <wsdl:part name="contextNameToGenerate" type="s:string" />
+    <wsdl:part name="contentFolderName" type="s:string" />
+    <wsdl:part name="ICSFolderName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateContextHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GenerateUserInContextHttpPostIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="contextName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateUserInContextHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="AddUsersToContextHttpPostIn">
+    <wsdl:part name="UserNames" type="s1:StringArray" />
+    <wsdl:part name="contextName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUsersToContextHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserFromContextHttpPostIn">
+    <wsdl:part name="userName" type="s:string" />
+    <wsdl:part name="contextName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserFromContextHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesHttpPostIn">
+    <wsdl:part name="locationId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesIncludingInheritedHttpPostIn">
+    <wsdl:part name="locationId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLocationRolesIncludingInheritedHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="GetRolePermissionsHttpPostIn">
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetRolePermissionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPermissionDefinition" />
+  </wsdl:message>
+  <wsdl:message name="CreateFolderRoleHttpPostIn">
+    <wsdl:part name="roleName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateFolderRoleHttpPostOut">
+    <wsdl:part name="Body" element="tns:Role" />
+  </wsdl:message>
+  <wsdl:message name="CreateNonFolderRoleHttpPostIn">
+    <wsdl:part name="roleName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateNonFolderRoleHttpPostOut">
+    <wsdl:part name="Body" element="tns:Role" />
+  </wsdl:message>
+  <wsdl:message name="CreateContextAdminRoleHttpPostIn">
+    <wsdl:part name="roleName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateContextAdminRoleHttpPostOut">
+    <wsdl:part name="Body" element="tns:Role" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleHttpPostIn">
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteRoleHttpPostOut" />
+  <wsdl:message name="GetContextNonFolderRolesHttpPostIn" />
+  <wsdl:message name="GetContextNonFolderRolesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="GetContextAdminRolesHttpPostIn" />
+  <wsdl:message name="GetContextAdminRolesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="GetContextFolderRolesHttpPostIn" />
+  <wsdl:message name="GetContextFolderRolesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfRole" />
+  </wsdl:message>
+  <wsdl:message name="AssignUserToRoleHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssignUserToRoleHttpPostOut" />
+  <wsdl:message name="RemoveUserFromRoleHttpPostIn">
+    <wsdl:part name="userId" type="s:string" />
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromRoleHttpPostOut" />
+  <wsdl:message name="AssignRoleToLocationHttpPostIn">
+    <wsdl:part name="locationId" type="s:string" />
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AssignRoleToLocationHttpPostOut" />
+  <wsdl:message name="RemoveRoleFromLocationHttpPostIn">
+    <wsdl:part name="locationId" type="s:string" />
+    <wsdl:part name="roleId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveRoleFromLocationHttpPostOut" />
+  <wsdl:message name="GeneratePermissionListHttpPostIn" />
+  <wsdl:message name="GeneratePermissionListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfPermissionDefinition" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationAdminsHttpPostIn" />
+  <wsdl:message name="GetApplicationAdminsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfUser" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToApplicationAdminsHttpPostIn">
+    <wsdl:part name="userName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToApplicationAdminsHttpPostOut" />
+  <wsdl:message name="RemoveUserFromApplicationAdminsHttpPostIn">
+    <wsdl:part name="userName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromApplicationAdminsHttpPostOut" />
+  <wsdl:message name="IsUserApplicationAdminHttpPostIn">
+    <wsdl:part name="userName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IsUserApplicationAdminHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="SecurityServiceSoap">
+    <wsdl:operation name="CreateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new Intelitest user.</wsdl:documentation>
+      <wsdl:input message="tns:CreateUserSoapIn" />
+      <wsdl:output message="tns:CreateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Authenticates the user (Verifies that name, pwd, email match an existing account, and that the account is not expired or locked, returning a security token.)</wsdl:documentation>
+      <wsdl:input message="tns:AuthenticateUserSoapIn" />
+      <wsdl:output message="tns:AuthenticateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds the user to a root context.</wsdl:documentation>
+      <wsdl:input message="tns:AddUserToContextSoapIn" />
+      <wsdl:output message="tns:AddUserToContextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPasswordComplexity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves password complexity information</wsdl:documentation>
+      <wsdl:input message="tns:GetPasswordComplexitySoapIn" />
+      <wsdl:output message="tns:GetPasswordComplexitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPasswordComplexityValid">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks to make sure the given password passes all complexity requirements</wsdl:documentation>
+      <wsdl:input message="tns:IsPasswordComplexityValidSoapIn" />
+      <wsdl:output message="tns:IsPasswordComplexityValidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the user's password.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:ChangePasswordSoapIn" />
+      <wsdl:output message="tns:ChangePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserContexts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the set of contexts the user is authorized to access.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserContextsSoapIn" />
+      <wsdl:output message="tns:GetUserContextsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContexts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the set of all contexts.  User must be authenticated and part of application admin.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllContextsSoapIn" />
+      <wsdl:output message="tns:GetAllContextsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesEmailAddress">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the given username and email address match.</wsdl:documentation>
+      <wsdl:input message="tns:UserNameMatchesEmailAddressSoapIn" />
+      <wsdl:output message="tns:UserNameMatchesEmailAddressSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sends an email to the given User with directions and a link to change their password.</wsdl:documentation>
+      <wsdl:input message="tns:SendPasswordResetEmailSoapIn" />
+      <wsdl:output message="tns:SendPasswordResetEmailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidResetUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the given encrypted token is correctly formatted</wsdl:documentation>
+      <wsdl:input message="tns:IsValidResetUrlSoapIn" />
+      <wsdl:output message="tns:IsValidResetUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesSecurityToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the security token in the given query string's stored user name matches the given user name</wsdl:documentation>
+      <wsdl:input message="tns:UserNameMatchesSecurityTokenSoapIn" />
+      <wsdl:output message="tns:UserNameMatchesSecurityTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CleanContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clean a context for a given context name or ID.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:CleanContextSoapIn" />
+      <wsdl:output message="tns:CleanContextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsLockedOut">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Check to see if a user account has been locked out.</wsdl:documentation>
+      <wsdl:input message="tns:IsLockedOutSoapIn" />
+      <wsdl:output message="tns:IsLockedOutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UnlockUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Admin function. Unlocks a user whose account has been locked out.</wsdl:documentation>
+      <wsdl:input message="tns:UnlockUserSoapIn" />
+      <wsdl:output message="tns:UnlockUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SapUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Admin function. Saps a user account.</wsdl:documentation>
+      <wsdl:input message="tns:SapUserSoapIn" />
+      <wsdl:output message="tns:SapUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Admin function. Resets a user's password. An account changing its own pwd should call ChangePassword() instead.</wsdl:documentation>
+      <wsdl:input message="tns:ResetUserPasswordSoapIn" />
+      <wsdl:output message="tns:ResetUserPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SecureResetUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">User function. Changes a user's password using a reset token when password is not known</wsdl:documentation>
+      <wsdl:input message="tns:SecureResetUserPasswordSoapIn" />
+      <wsdl:output message="tns:SecureResetUserPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in a context, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserListSoapIn" />
+      <wsdl:output message="tns:GetUserListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in the system, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetGlobalUserListSoapIn" />
+      <wsdl:output message="tns:GetGlobalUserListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListGivenRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in the system for a given roleid, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserListGivenRoleSoapIn" />
+      <wsdl:output message="tns:GetUserListGivenRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a context correctly</wsdl:documentation>
+      <wsdl:input message="tns:GenerateContextSoapIn" />
+      <wsdl:output message="tns:GenerateContextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateUserInContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a user in the context corectly</wsdl:documentation>
+      <wsdl:input message="tns:GenerateUserInContextSoapIn" />
+      <wsdl:output message="tns:GenerateUserInContextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUsersToContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds users to contexts</wsdl:documentation>
+      <wsdl:input message="tns:AddUsersToContextSoapIn" />
+      <wsdl:output message="tns:AddUsersToContextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a user in the context corectly</wsdl:documentation>
+      <wsdl:input message="tns:DeleteUserFromContextSoapIn" />
+      <wsdl:output message="tns:DeleteUserFromContextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Updates user's demographic data.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:UpdateUserSoapIn" />
+      <wsdl:output message="tns:UpdateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the roles assigned to a location.</wsdl:documentation>
+      <wsdl:input message="tns:GetLocationRolesSoapIn" />
+      <wsdl:output message="tns:GetLocationRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRolesIncludingInherited">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the roles assigned to a location, including inherited roles.</wsdl:documentation>
+      <wsdl:input message="tns:GetLocationRolesIncludingInheritedSoapIn" />
+      <wsdl:output message="tns:GetLocationRolesIncludingInheritedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePermissions">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list of permissions assigned to a role.</wsdl:documentation>
+      <wsdl:input message="tns:GetRolePermissionsSoapIn" />
+      <wsdl:output message="tns:GetRolePermissionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissionsAtLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the user permissions at location.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserPermissionsAtLocationSoapIn" />
+      <wsdl:output message="tns:GetUserPermissionsAtLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissionsForNonFolders">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the user permissions at location.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserPermissionsForNonFoldersSoapIn" />
+      <wsdl:output message="tns:GetUserPermissionsForNonFoldersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolderRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a folder role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateFolderRoleSoapIn" />
+      <wsdl:output message="tns:CreateFolderRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonFolderRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a non folder role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateNonFolderRoleSoapIn" />
+      <wsdl:output message="tns:CreateNonFolderRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateContextAdminRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a context admin role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateContextAdminRoleSoapIn" />
+      <wsdl:output message="tns:CreateContextAdminRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetRolePermissions">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sets the role permissions.  ALL permissions will be REPLACED by the passed set of permissions.</wsdl:documentation>
+      <wsdl:input message="tns:SetRolePermissionsSoapIn" />
+      <wsdl:output message="tns:SetRolePermissionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a role</wsdl:documentation>
+      <wsdl:input message="tns:DeleteRoleSoapIn" />
+      <wsdl:output message="tns:DeleteRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextNonFolderRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the non folder roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextNonFolderRolesSoapIn" />
+      <wsdl:output message="tns:GetContextNonFolderRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextAdminRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the context admin roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextAdminRolesSoapIn" />
+      <wsdl:output message="tns:GetContextAdminRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextFolderRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the folder roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextFolderRolesSoapIn" />
+      <wsdl:output message="tns:GetContextFolderRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignUserToRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Assigns a user to a role.</wsdl:documentation>
+      <wsdl:input message="tns:AssignUserToRoleSoapIn" />
+      <wsdl:output message="tns:AssignUserToRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user from a role.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserFromRoleSoapIn" />
+      <wsdl:output message="tns:RemoveUserFromRoleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignRoleToLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Assigns the role to a location.</wsdl:documentation>
+      <wsdl:input message="tns:AssignRoleToLocationSoapIn" />
+      <wsdl:output message="tns:AssignRoleToLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoleFromLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes the role from a location folder.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveRoleFromLocationSoapIn" />
+      <wsdl:output message="tns:RemoveRoleFromLocationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GeneratePermissionList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list of ALL available permissions.</wsdl:documentation>
+      <wsdl:input message="tns:GeneratePermissionListSoapIn" />
+      <wsdl:output message="tns:GeneratePermissionListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of all application admins.</wsdl:documentation>
+      <wsdl:input message="tns:GetApplicationAdminsSoapIn" />
+      <wsdl:output message="tns:GetApplicationAdminsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a user to the application admin group.</wsdl:documentation>
+      <wsdl:input message="tns:AddUserToApplicationAdminsSoapIn" />
+      <wsdl:output message="tns:AddUserToApplicationAdminsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user from the application admin group.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserFromApplicationAdminsSoapIn" />
+      <wsdl:output message="tns:RemoveUserFromApplicationAdminsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserApplicationAdmin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Determines is the specified userName is an application admin.</wsdl:documentation>
+      <wsdl:input message="tns:IsUserApplicationAdminSoapIn" />
+      <wsdl:output message="tns:IsUserApplicationAdminSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SecurityServiceHttpGet">
+    <wsdl:operation name="CreateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new Intelitest user.</wsdl:documentation>
+      <wsdl:input message="tns:CreateUserHttpGetIn" />
+      <wsdl:output message="tns:CreateUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds the user to a root context.</wsdl:documentation>
+      <wsdl:input message="tns:AddUserToContextHttpGetIn" />
+      <wsdl:output message="tns:AddUserToContextHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPasswordComplexityValid">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks to make sure the given password passes all complexity requirements</wsdl:documentation>
+      <wsdl:input message="tns:IsPasswordComplexityValidHttpGetIn" />
+      <wsdl:output message="tns:IsPasswordComplexityValidHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the user's password.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:ChangePasswordHttpGetIn" />
+      <wsdl:output message="tns:ChangePasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserContexts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the set of contexts the user is authorized to access.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserContextsHttpGetIn" />
+      <wsdl:output message="tns:GetUserContextsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContexts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the set of all contexts.  User must be authenticated and part of application admin.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllContextsHttpGetIn" />
+      <wsdl:output message="tns:GetAllContextsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesEmailAddress">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the given username and email address match.</wsdl:documentation>
+      <wsdl:input message="tns:UserNameMatchesEmailAddressHttpGetIn" />
+      <wsdl:output message="tns:UserNameMatchesEmailAddressHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sends an email to the given User with directions and a link to change their password.</wsdl:documentation>
+      <wsdl:input message="tns:SendPasswordResetEmailHttpGetIn" />
+      <wsdl:output message="tns:SendPasswordResetEmailHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidResetUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the given encrypted token is correctly formatted</wsdl:documentation>
+      <wsdl:input message="tns:IsValidResetUrlHttpGetIn" />
+      <wsdl:output message="tns:IsValidResetUrlHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesSecurityToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the security token in the given query string's stored user name matches the given user name</wsdl:documentation>
+      <wsdl:input message="tns:UserNameMatchesSecurityTokenHttpGetIn" />
+      <wsdl:output message="tns:UserNameMatchesSecurityTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CleanContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clean a context for a given context name or ID.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:CleanContextHttpGetIn" />
+      <wsdl:output message="tns:CleanContextHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SecureResetUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">User function. Changes a user's password using a reset token when password is not known</wsdl:documentation>
+      <wsdl:input message="tns:SecureResetUserPasswordHttpGetIn" />
+      <wsdl:output message="tns:SecureResetUserPasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in a context, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserListHttpGetIn" />
+      <wsdl:output message="tns:GetUserListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in the system, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetGlobalUserListHttpGetIn" />
+      <wsdl:output message="tns:GetGlobalUserListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListGivenRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in the system for a given roleid, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserListGivenRoleHttpGetIn" />
+      <wsdl:output message="tns:GetUserListGivenRoleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a context correctly</wsdl:documentation>
+      <wsdl:input message="tns:GenerateContextHttpGetIn" />
+      <wsdl:output message="tns:GenerateContextHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateUserInContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a user in the context corectly</wsdl:documentation>
+      <wsdl:input message="tns:GenerateUserInContextHttpGetIn" />
+      <wsdl:output message="tns:GenerateUserInContextHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUsersToContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds users to contexts</wsdl:documentation>
+      <wsdl:input message="tns:AddUsersToContextHttpGetIn" />
+      <wsdl:output message="tns:AddUsersToContextHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a user in the context corectly</wsdl:documentation>
+      <wsdl:input message="tns:DeleteUserFromContextHttpGetIn" />
+      <wsdl:output message="tns:DeleteUserFromContextHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the roles assigned to a location.</wsdl:documentation>
+      <wsdl:input message="tns:GetLocationRolesHttpGetIn" />
+      <wsdl:output message="tns:GetLocationRolesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRolesIncludingInherited">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the roles assigned to a location, including inherited roles.</wsdl:documentation>
+      <wsdl:input message="tns:GetLocationRolesIncludingInheritedHttpGetIn" />
+      <wsdl:output message="tns:GetLocationRolesIncludingInheritedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePermissions">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list of permissions assigned to a role.</wsdl:documentation>
+      <wsdl:input message="tns:GetRolePermissionsHttpGetIn" />
+      <wsdl:output message="tns:GetRolePermissionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolderRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a folder role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateFolderRoleHttpGetIn" />
+      <wsdl:output message="tns:CreateFolderRoleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonFolderRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a non folder role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateNonFolderRoleHttpGetIn" />
+      <wsdl:output message="tns:CreateNonFolderRoleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateContextAdminRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a context admin role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateContextAdminRoleHttpGetIn" />
+      <wsdl:output message="tns:CreateContextAdminRoleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a role</wsdl:documentation>
+      <wsdl:input message="tns:DeleteRoleHttpGetIn" />
+      <wsdl:output message="tns:DeleteRoleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextNonFolderRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the non folder roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextNonFolderRolesHttpGetIn" />
+      <wsdl:output message="tns:GetContextNonFolderRolesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextAdminRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the context admin roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextAdminRolesHttpGetIn" />
+      <wsdl:output message="tns:GetContextAdminRolesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextFolderRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the folder roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextFolderRolesHttpGetIn" />
+      <wsdl:output message="tns:GetContextFolderRolesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignUserToRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Assigns a user to a role.</wsdl:documentation>
+      <wsdl:input message="tns:AssignUserToRoleHttpGetIn" />
+      <wsdl:output message="tns:AssignUserToRoleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user from a role.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserFromRoleHttpGetIn" />
+      <wsdl:output message="tns:RemoveUserFromRoleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignRoleToLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Assigns the role to a location.</wsdl:documentation>
+      <wsdl:input message="tns:AssignRoleToLocationHttpGetIn" />
+      <wsdl:output message="tns:AssignRoleToLocationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoleFromLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes the role from a location folder.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveRoleFromLocationHttpGetIn" />
+      <wsdl:output message="tns:RemoveRoleFromLocationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GeneratePermissionList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list of ALL available permissions.</wsdl:documentation>
+      <wsdl:input message="tns:GeneratePermissionListHttpGetIn" />
+      <wsdl:output message="tns:GeneratePermissionListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of all application admins.</wsdl:documentation>
+      <wsdl:input message="tns:GetApplicationAdminsHttpGetIn" />
+      <wsdl:output message="tns:GetApplicationAdminsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a user to the application admin group.</wsdl:documentation>
+      <wsdl:input message="tns:AddUserToApplicationAdminsHttpGetIn" />
+      <wsdl:output message="tns:AddUserToApplicationAdminsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user from the application admin group.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserFromApplicationAdminsHttpGetIn" />
+      <wsdl:output message="tns:RemoveUserFromApplicationAdminsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserApplicationAdmin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Determines is the specified userName is an application admin.</wsdl:documentation>
+      <wsdl:input message="tns:IsUserApplicationAdminHttpGetIn" />
+      <wsdl:output message="tns:IsUserApplicationAdminHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SecurityServiceHttpPost">
+    <wsdl:operation name="CreateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a new Intelitest user.</wsdl:documentation>
+      <wsdl:input message="tns:CreateUserHttpPostIn" />
+      <wsdl:output message="tns:CreateUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds the user to a root context.</wsdl:documentation>
+      <wsdl:input message="tns:AddUserToContextHttpPostIn" />
+      <wsdl:output message="tns:AddUserToContextHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsPasswordComplexityValid">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks to make sure the given password passes all complexity requirements</wsdl:documentation>
+      <wsdl:input message="tns:IsPasswordComplexityValidHttpPostIn" />
+      <wsdl:output message="tns:IsPasswordComplexityValidHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the user's password.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:ChangePasswordHttpPostIn" />
+      <wsdl:output message="tns:ChangePasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserContexts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the set of contexts the user is authorized to access.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserContextsHttpPostIn" />
+      <wsdl:output message="tns:GetUserContextsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContexts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the set of all contexts.  User must be authenticated and part of application admin.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllContextsHttpPostIn" />
+      <wsdl:output message="tns:GetAllContextsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesEmailAddress">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the given username and email address match.</wsdl:documentation>
+      <wsdl:input message="tns:UserNameMatchesEmailAddressHttpPostIn" />
+      <wsdl:output message="tns:UserNameMatchesEmailAddressHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Sends an email to the given User with directions and a link to change their password.</wsdl:documentation>
+      <wsdl:input message="tns:SendPasswordResetEmailHttpPostIn" />
+      <wsdl:output message="tns:SendPasswordResetEmailHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidResetUrl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the given encrypted token is correctly formatted</wsdl:documentation>
+      <wsdl:input message="tns:IsValidResetUrlHttpPostIn" />
+      <wsdl:output message="tns:IsValidResetUrlHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesSecurityToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Verifies that the security token in the given query string's stored user name matches the given user name</wsdl:documentation>
+      <wsdl:input message="tns:UserNameMatchesSecurityTokenHttpPostIn" />
+      <wsdl:output message="tns:UserNameMatchesSecurityTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CleanContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clean a context for a given context name or ID.  User must be authenticated.</wsdl:documentation>
+      <wsdl:input message="tns:CleanContextHttpPostIn" />
+      <wsdl:output message="tns:CleanContextHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SecureResetUserPassword">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">User function. Changes a user's password using a reset token when password is not known</wsdl:documentation>
+      <wsdl:input message="tns:SecureResetUserPasswordHttpPostIn" />
+      <wsdl:output message="tns:SecureResetUserPasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in a context, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserListHttpPostIn" />
+      <wsdl:output message="tns:GetUserListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalUserList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in the system, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetGlobalUserListHttpPostIn" />
+      <wsdl:output message="tns:GetGlobalUserListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListGivenRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of users in the system for a given roleid, including demographics.</wsdl:documentation>
+      <wsdl:input message="tns:GetUserListGivenRoleHttpPostIn" />
+      <wsdl:output message="tns:GetUserListGivenRoleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a context correctly</wsdl:documentation>
+      <wsdl:input message="tns:GenerateContextHttpPostIn" />
+      <wsdl:output message="tns:GenerateContextHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateUserInContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a user in the context corectly</wsdl:documentation>
+      <wsdl:input message="tns:GenerateUserInContextHttpPostIn" />
+      <wsdl:output message="tns:GenerateUserInContextHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUsersToContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds users to contexts</wsdl:documentation>
+      <wsdl:input message="tns:AddUsersToContextHttpPostIn" />
+      <wsdl:output message="tns:AddUsersToContextHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromContext">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a user in the context corectly</wsdl:documentation>
+      <wsdl:input message="tns:DeleteUserFromContextHttpPostIn" />
+      <wsdl:output message="tns:DeleteUserFromContextHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the roles assigned to a location.</wsdl:documentation>
+      <wsdl:input message="tns:GetLocationRolesHttpPostIn" />
+      <wsdl:output message="tns:GetLocationRolesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRolesIncludingInherited">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the roles assigned to a location, including inherited roles.</wsdl:documentation>
+      <wsdl:input message="tns:GetLocationRolesIncludingInheritedHttpPostIn" />
+      <wsdl:output message="tns:GetLocationRolesIncludingInheritedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePermissions">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list of permissions assigned to a role.</wsdl:documentation>
+      <wsdl:input message="tns:GetRolePermissionsHttpPostIn" />
+      <wsdl:output message="tns:GetRolePermissionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolderRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a folder role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateFolderRoleHttpPostIn" />
+      <wsdl:output message="tns:CreateFolderRoleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonFolderRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a non folder role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateNonFolderRoleHttpPostIn" />
+      <wsdl:output message="tns:CreateNonFolderRoleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateContextAdminRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Creates a context admin role.</wsdl:documentation>
+      <wsdl:input message="tns:CreateContextAdminRoleHttpPostIn" />
+      <wsdl:output message="tns:CreateContextAdminRoleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a role</wsdl:documentation>
+      <wsdl:input message="tns:DeleteRoleHttpPostIn" />
+      <wsdl:output message="tns:DeleteRoleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextNonFolderRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the non folder roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextNonFolderRolesHttpPostIn" />
+      <wsdl:output message="tns:GetContextNonFolderRolesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextAdminRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the context admin roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextAdminRolesHttpPostIn" />
+      <wsdl:output message="tns:GetContextAdminRolesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextFolderRoles">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the folder roles defined for this context.</wsdl:documentation>
+      <wsdl:input message="tns:GetContextFolderRolesHttpPostIn" />
+      <wsdl:output message="tns:GetContextFolderRolesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignUserToRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Assigns a user to a role.</wsdl:documentation>
+      <wsdl:input message="tns:AssignUserToRoleHttpPostIn" />
+      <wsdl:output message="tns:AssignUserToRoleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromRole">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user from a role.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserFromRoleHttpPostIn" />
+      <wsdl:output message="tns:RemoveUserFromRoleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AssignRoleToLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Assigns the role to a location.</wsdl:documentation>
+      <wsdl:input message="tns:AssignRoleToLocationHttpPostIn" />
+      <wsdl:output message="tns:AssignRoleToLocationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoleFromLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes the role from a location folder.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveRoleFromLocationHttpPostIn" />
+      <wsdl:output message="tns:RemoveRoleFromLocationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GeneratePermissionList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the list of ALL available permissions.</wsdl:documentation>
+      <wsdl:input message="tns:GeneratePermissionListHttpPostIn" />
+      <wsdl:output message="tns:GeneratePermissionListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a list of all application admins.</wsdl:documentation>
+      <wsdl:input message="tns:GetApplicationAdminsHttpPostIn" />
+      <wsdl:output message="tns:GetApplicationAdminsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a user to the application admin group.</wsdl:documentation>
+      <wsdl:input message="tns:AddUserToApplicationAdminsHttpPostIn" />
+      <wsdl:output message="tns:AddUserToApplicationAdminsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromApplicationAdmins">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Removes a user from the application admin group.</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserFromApplicationAdminsHttpPostIn" />
+      <wsdl:output message="tns:RemoveUserFromApplicationAdminsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserApplicationAdmin">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Determines is the specified userName is an application admin.</wsdl:documentation>
+      <wsdl:input message="tns:IsUserApplicationAdminHttpPostIn" />
+      <wsdl:output message="tns:IsUserApplicationAdminHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SecurityServiceSoap" type="tns:SecurityServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateUser">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CreateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateUseruser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AuthenticateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToContext">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AddUserToContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddUserToContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPasswordComplexity">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetPasswordComplexity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPasswordComplexityValid">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/IsPasswordComplexityValid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ChangePassworduser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserContexts">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserContexts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUserContextsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContexts">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetAllContexts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetAllContextsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesEmailAddress">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/UserNameMatchesEmailAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SendPasswordResetEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidResetUrl">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/IsValidResetUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesSecurityToken">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/UserNameMatchesSecurityToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanContext">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CleanContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CleanContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsLockedOut">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/IsLockedOut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:IsLockedOutuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnlockUser">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/UnlockUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UnlockUseruser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapUser">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SapUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SapUseruser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ResetUserPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ResetUserPassworduser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SecureResetUserPassword">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SecureResetUserPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUserListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalUserList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetGlobalUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetGlobalUserListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListGivenRole">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserListGivenRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUserListGivenRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateContext">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GenerateContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GenerateContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateUserInContext">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GenerateUserInContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GenerateUserInContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUsersToContext">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AddUsersToContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddUsersToContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromContext">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteUserFromContext" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteUserFromContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateUseruser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRoles">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetLocationRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetLocationRolesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRolesIncludingInherited">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetLocationRolesIncludingInherited" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetLocationRolesIncludingInheriteduser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePermissions">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetRolePermissions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetRolePermissionsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissionsAtLocation">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserPermissionsAtLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUserPermissionsAtLocationuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissionsForNonFolders">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserPermissionsForNonFolders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUserPermissionsForNonFoldersuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolderRole">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CreateFolderRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateFolderRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonFolderRole">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CreateNonFolderRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateNonFolderRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContextAdminRole">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CreateContextAdminRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateContextAdminRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRolePermissions">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SetRolePermissions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SetRolePermissionsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextNonFolderRoles">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContextNonFolderRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetContextNonFolderRolesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextAdminRoles">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContextAdminRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetContextAdminRolesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextFolderRoles">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContextFolderRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetContextFolderRolesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignUserToRole">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AssignUserToRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AssignUserToRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromRole">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/RemoveUserFromRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveUserFromRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignRoleToLocation">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AssignRoleToLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AssignRoleToLocationuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoleFromLocation">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/RemoveRoleFromLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveRoleFromLocationuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeneratePermissionList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GeneratePermissionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GeneratePermissionListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationAdmins">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetApplicationAdmins" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetApplicationAdminsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToApplicationAdmins">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AddUserToApplicationAdmins" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddUserToApplicationAdminsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromApplicationAdmins">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/RemoveUserFromApplicationAdmins" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:RemoveUserFromApplicationAdminsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUserApplicationAdmin">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/IsUserApplicationAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:IsUserApplicationAdminuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SecurityServiceSoap12" type="tns:SecurityServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateUser">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CreateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateUseruser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateUser">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AuthenticateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToContext">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AddUserToContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AddUserToContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPasswordComplexity">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetPasswordComplexity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsPasswordComplexityValid">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/IsPasswordComplexityValid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ChangePassworduser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserContexts">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserContexts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUserContextsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContexts">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetAllContexts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetAllContextsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesEmailAddress">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/UserNameMatchesEmailAddress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SendPasswordResetEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValidResetUrl">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/IsValidResetUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesSecurityToken">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/UserNameMatchesSecurityToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanContext">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CleanContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CleanContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsLockedOut">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/IsLockedOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:IsLockedOutuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnlockUser">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/UnlockUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UnlockUseruser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SapUser">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SapUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SapUseruser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResetUserPassword">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ResetUserPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ResetUserPassworduser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SecureResetUserPassword">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SecureResetUserPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUserListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalUserList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetGlobalUserList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetGlobalUserListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListGivenRole">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserListGivenRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUserListGivenRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateContext">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GenerateContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GenerateContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateUserInContext">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GenerateUserInContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GenerateUserInContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUsersToContext">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AddUsersToContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AddUsersToContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromContext">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteUserFromContext" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteUserFromContextuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateUseruser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRoles">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetLocationRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetLocationRolesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRolesIncludingInherited">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetLocationRolesIncludingInherited" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetLocationRolesIncludingInheriteduser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePermissions">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetRolePermissions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetRolePermissionsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissionsAtLocation">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserPermissionsAtLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUserPermissionsAtLocationuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserPermissionsForNonFolders">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUserPermissionsForNonFolders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUserPermissionsForNonFoldersuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolderRole">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CreateFolderRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateFolderRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonFolderRole">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CreateNonFolderRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateNonFolderRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContextAdminRole">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CreateContextAdminRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateContextAdminRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRolePermissions">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SetRolePermissions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SetRolePermissionsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextNonFolderRoles">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContextNonFolderRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetContextNonFolderRolesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextAdminRoles">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContextAdminRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetContextAdminRolesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextFolderRoles">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetContextFolderRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetContextFolderRolesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignUserToRole">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AssignUserToRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AssignUserToRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromRole">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/RemoveUserFromRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveUserFromRoleuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignRoleToLocation">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AssignRoleToLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AssignRoleToLocationuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoleFromLocation">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/RemoveRoleFromLocation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveRoleFromLocationuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeneratePermissionList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GeneratePermissionList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GeneratePermissionListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationAdmins">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetApplicationAdmins" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetApplicationAdminsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToApplicationAdmins">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AddUserToApplicationAdmins" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AddUserToApplicationAdminsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromApplicationAdmins">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/RemoveUserFromApplicationAdmins" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:RemoveUserFromApplicationAdminsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUserApplicationAdmin">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/IsUserApplicationAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:IsUserApplicationAdminuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SecurityServiceHttpGet" type="tns:SecurityServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="CreateUser">
+      <http:operation location="/CreateUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToContext">
+      <http:operation location="/AddUserToContext" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="IsPasswordComplexityValid">
+      <http:operation location="/IsPasswordComplexityValid" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <http:operation location="/ChangePassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserContexts">
+      <http:operation location="/GetUserContexts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContexts">
+      <http:operation location="/GetAllContexts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesEmailAddress">
+      <http:operation location="/UserNameMatchesEmailAddress" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <http:operation location="/SendPasswordResetEmail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidResetUrl">
+      <http:operation location="/IsValidResetUrl" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesSecurityToken">
+      <http:operation location="/UserNameMatchesSecurityToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanContext">
+      <http:operation location="/CleanContext" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SecureResetUserPassword">
+      <http:operation location="/SecureResetUserPassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserList">
+      <http:operation location="/GetUserList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalUserList">
+      <http:operation location="/GetGlobalUserList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListGivenRole">
+      <http:operation location="/GetUserListGivenRole" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateContext">
+      <http:operation location="/GenerateContext" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateUserInContext">
+      <http:operation location="/GenerateUserInContext" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUsersToContext">
+      <http:operation location="/AddUsersToContext" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromContext">
+      <http:operation location="/DeleteUserFromContext" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRoles">
+      <http:operation location="/GetLocationRoles" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRolesIncludingInherited">
+      <http:operation location="/GetLocationRolesIncludingInherited" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePermissions">
+      <http:operation location="/GetRolePermissions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolderRole">
+      <http:operation location="/CreateFolderRole" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonFolderRole">
+      <http:operation location="/CreateNonFolderRole" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContextAdminRole">
+      <http:operation location="/CreateContextAdminRole" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <http:operation location="/DeleteRole" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextNonFolderRoles">
+      <http:operation location="/GetContextNonFolderRoles" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextAdminRoles">
+      <http:operation location="/GetContextAdminRoles" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextFolderRoles">
+      <http:operation location="/GetContextFolderRoles" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignUserToRole">
+      <http:operation location="/AssignUserToRole" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromRole">
+      <http:operation location="/RemoveUserFromRole" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="AssignRoleToLocation">
+      <http:operation location="/AssignRoleToLocation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoleFromLocation">
+      <http:operation location="/RemoveRoleFromLocation" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GeneratePermissionList">
+      <http:operation location="/GeneratePermissionList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationAdmins">
+      <http:operation location="/GetApplicationAdmins" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToApplicationAdmins">
+      <http:operation location="/AddUserToApplicationAdmins" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromApplicationAdmins">
+      <http:operation location="/RemoveUserFromApplicationAdmins" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserApplicationAdmin">
+      <http:operation location="/IsUserApplicationAdmin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SecurityServiceHttpPost" type="tns:SecurityServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="CreateUser">
+      <http:operation location="/CreateUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToContext">
+      <http:operation location="/AddUserToContext" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="IsPasswordComplexityValid">
+      <http:operation location="/IsPasswordComplexityValid" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <http:operation location="/ChangePassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserContexts">
+      <http:operation location="/GetUserContexts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllContexts">
+      <http:operation location="/GetAllContexts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesEmailAddress">
+      <http:operation location="/UserNameMatchesEmailAddress" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordResetEmail">
+      <http:operation location="/SendPasswordResetEmail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="IsValidResetUrl">
+      <http:operation location="/IsValidResetUrl" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserNameMatchesSecurityToken">
+      <http:operation location="/UserNameMatchesSecurityToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CleanContext">
+      <http:operation location="/CleanContext" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SecureResetUserPassword">
+      <http:operation location="/SecureResetUserPassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserList">
+      <http:operation location="/GetUserList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGlobalUserList">
+      <http:operation location="/GetGlobalUserList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListGivenRole">
+      <http:operation location="/GetUserListGivenRole" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateContext">
+      <http:operation location="/GenerateContext" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateUserInContext">
+      <http:operation location="/GenerateUserInContext" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUsersToContext">
+      <http:operation location="/AddUsersToContext" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromContext">
+      <http:operation location="/DeleteUserFromContext" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRoles">
+      <http:operation location="/GetLocationRoles" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLocationRolesIncludingInherited">
+      <http:operation location="/GetLocationRolesIncludingInherited" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePermissions">
+      <http:operation location="/GetRolePermissions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolderRole">
+      <http:operation location="/CreateFolderRole" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonFolderRole">
+      <http:operation location="/CreateNonFolderRole" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContextAdminRole">
+      <http:operation location="/CreateContextAdminRole" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <http:operation location="/DeleteRole" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetContextNonFolderRoles">
+      <http:operation location="/GetContextNonFolderRoles" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextAdminRoles">
+      <http:operation location="/GetContextAdminRoles" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContextFolderRoles">
+      <http:operation location="/GetContextFolderRoles" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AssignUserToRole">
+      <http:operation location="/AssignUserToRole" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromRole">
+      <http:operation location="/RemoveUserFromRole" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="AssignRoleToLocation">
+      <http:operation location="/AssignRoleToLocation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRoleFromLocation">
+      <http:operation location="/RemoveRoleFromLocation" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GeneratePermissionList">
+      <http:operation location="/GeneratePermissionList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationAdmins">
+      <http:operation location="/GetApplicationAdmins" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToApplicationAdmins">
+      <http:operation location="/AddUserToApplicationAdmins" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromApplicationAdmins">
+      <http:operation location="/RemoveUserFromApplicationAdmins" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserApplicationAdmin">
+      <http:operation location="/IsUserApplicationAdmin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SecurityService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Web methods for dealing with security related calls</wsdl:documentation>
+    <wsdl:port name="SecurityServiceSoap" binding="tns:SecurityServiceSoap">
+      <soap:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SecurityService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SecurityServiceSoap12" binding="tns:SecurityServiceSoap12">
+      <soap12:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SecurityService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SecurityServiceHttpGet" binding="tns:SecurityServiceHttpGet">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SecurityService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SecurityServiceHttpPost" binding="tns:SecurityServiceHttpPost">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SecurityService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

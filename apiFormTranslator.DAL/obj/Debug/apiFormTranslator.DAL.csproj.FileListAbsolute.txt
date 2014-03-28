@@ -1,0 +1,5 @@
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.DAL\bin\Debug\apiFormTranslator.DAL.dll
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.DAL\bin\Debug\apiFormTranslator.DAL.pdb
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.DAL\obj\Debug\apiFormTranslator.DAL.dll
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.DAL\obj\Debug\apiFormTranslator.DAL.pdb
+C:\SD Products\SD Tools\apiFormTranslator\apiFormTranslator.DAL\obj\Debug\apiFormTranslator.DAL.csprojResolveAssemblyReference.cache

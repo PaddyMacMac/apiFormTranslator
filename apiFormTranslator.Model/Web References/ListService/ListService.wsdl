@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.prometric.com/webservices/intelitest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.prometric.com/webservices/intelitest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webservice interface for list management.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.prometric.com/webservices/intelitest">
+      <s:element name="CopyItemList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemListId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyItemListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CopyItemListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="user" type="tns:User" />
+      <s:complexType name="User">
+        <s:attribute name="currentContextId" type="s:string" />
+        <s:attribute name="userName" type="s:string" />
+        <s:attribute name="userId" type="s:string" />
+        <s:attribute name="authenticated" type="s:boolean" use="required" />
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="CopyExhibitList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strExhibitListId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strAssetCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyExhibitListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CopyExhibitListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemListContentHeaderSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strItemListId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemListContentHeaderSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemListContentHeaderSearchResult" type="tns:ArrayOfSearchReference" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSearchReference">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SearchReference" nillable="true" type="tns:SearchReference" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SearchReference">
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="value" type="s:string" />
+        <s:attribute name="ref" type="s:string" />
+        <s:attribute name="display" type="s:string" />
+        <s:attribute name="type" type="s:string" />
+      </s:complexType>
+      <s:element name="SaveItemList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="objItemList" type="tns:ItemList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ItemList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedDatetime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedDatetime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentOutlineId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkflowId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemListElements" type="tns:ArrayOfItemListElement" />
+          <s:element minOccurs="0" maxOccurs="1" name="EffectiveDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpirationDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfItemListElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemListElement" nillable="true" type="tns:ItemListElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemListElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemListElementType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemListElementId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ItemId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ordinal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FormWeight" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Selectable" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Equator" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Scored" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewElement" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveItemListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveItemListResult" type="tns:ItemList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadItemList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strItemListId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadItemListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadItemListResult" type="tns:ItemList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItemList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strItemListId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItemListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteItemListResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SavePublicationList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="objPublicationList" type="tns:PublicationList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PublicationList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedDatetime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PublicationListElements" type="tns:ArrayOfPublicationListElement" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPublicationListElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PublicationListElement" nillable="true" type="tns:PublicationListElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PublicationListElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PublicationListElementId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PublicationId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ordinal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="OpenBook" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SavePublicationListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SavePublicationListResult" type="tns:PublicationList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPublicationList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strPublicationListId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPublicationListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadPublicationListResult" type="tns:PublicationList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePublicationList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strPublicationListId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeletePublicationListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeletePublicationListResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveExhibitList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="objExhibitList" type="tns:ExhibitIBList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ExhibitIBList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Language" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ListMastercode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedDatetime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreatedUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedDatetime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Location" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Icscode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ButtonCaption" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ButtonAssetId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ButtonAssetName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExhibitIBListElements" type="tns:ArrayOfExhibitIBListElement" />
+          <s:element minOccurs="0" maxOccurs="1" name="Keywords" type="tns:ArrayOfKeyword" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfExhibitIBListElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExhibitIBListElement" nillable="true" type="tns:ExhibitIBListElement" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ExhibitIBListElement">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ExhibitIBListElementId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssetId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ordinal" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Caption" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssetMimeType" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfKeyword">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Keyword" nillable="true" type="tns:Keyword" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Keyword">
+        <s:attribute name="value" type="s:string" />
+      </s:complexType>
+      <s:element name="SaveExhibitListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveExhibitListResult" type="tns:ExhibitIBList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadExhibitList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strExhibitListId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadExhibitListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadExhibitListResult" type="tns:ExhibitIBList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteExhibitList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strExhibitListId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteExhibitListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteExhibitListResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ArrayOfSearchReference" nillable="true" type="tns:ArrayOfSearchReference" />
+      <s:element name="ItemList" nillable="true" type="tns:ItemList" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="PublicationList" nillable="true" type="tns:PublicationList" />
+      <s:element name="ExhibitIBList" nillable="true" type="tns:ExhibitIBList" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CopyItemListSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyItemList" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemListSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyItemListResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CopyExhibitListSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyExhibitList" />
+  </wsdl:message>
+  <wsdl:message name="CopyExhibitListSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyExhibitListResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyExhibitListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="ItemListContentHeaderSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemListContentHeaderSearch" />
+  </wsdl:message>
+  <wsdl:message name="ItemListContentHeaderSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemListContentHeaderSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemListContentHeaderSearchuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemListSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveItemList" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemListSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveItemListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemListSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadItemList" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemListSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadItemListResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemListSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteItemList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemListSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteItemListResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SavePublicationListSoapIn">
+    <wsdl:part name="parameters" element="tns:SavePublicationList" />
+  </wsdl:message>
+  <wsdl:message name="SavePublicationListSoapOut">
+    <wsdl:part name="parameters" element="tns:SavePublicationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SavePublicationListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublicationListSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadPublicationList" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublicationListSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadPublicationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublicationListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeletePublicationListSoapIn">
+    <wsdl:part name="parameters" element="tns:DeletePublicationList" />
+  </wsdl:message>
+  <wsdl:message name="DeletePublicationListSoapOut">
+    <wsdl:part name="parameters" element="tns:DeletePublicationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeletePublicationListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="SaveExhibitListSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveExhibitList" />
+  </wsdl:message>
+  <wsdl:message name="SaveExhibitListSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveExhibitListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveExhibitListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadExhibitListSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadExhibitList" />
+  </wsdl:message>
+  <wsdl:message name="LoadExhibitListSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadExhibitListResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadExhibitListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExhibitListSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteExhibitList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExhibitListSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteExhibitListResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExhibitListuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemListHttpGetIn">
+    <wsdl:part name="itemListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyExhibitListHttpGetIn">
+    <wsdl:part name="strExhibitListId" type="s:string" />
+    <wsdl:part name="strAssetCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyExhibitListHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemListContentHeaderSearchHttpGetIn">
+    <wsdl:part name="strItemListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemListContentHeaderSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSearchReference" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemListHttpGetIn">
+    <wsdl:part name="strItemListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ItemList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemListHttpGetIn">
+    <wsdl:part name="strItemListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemListHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublicationListHttpGetIn">
+    <wsdl:part name="strPublicationListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublicationListHttpGetOut">
+    <wsdl:part name="Body" element="tns:PublicationList" />
+  </wsdl:message>
+  <wsdl:message name="DeletePublicationListHttpGetIn">
+    <wsdl:part name="strPublicationListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeletePublicationListHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LoadExhibitListHttpGetIn">
+    <wsdl:part name="strExhibitListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadExhibitListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ExhibitIBList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExhibitListHttpGetIn">
+    <wsdl:part name="strExhibitListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExhibitListHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemListHttpPostIn">
+    <wsdl:part name="itemListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyExhibitListHttpPostIn">
+    <wsdl:part name="strExhibitListId" type="s:string" />
+    <wsdl:part name="strAssetCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyExhibitListHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemListContentHeaderSearchHttpPostIn">
+    <wsdl:part name="strItemListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ItemListContentHeaderSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSearchReference" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemListHttpPostIn">
+    <wsdl:part name="strItemListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ItemList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemListHttpPostIn">
+    <wsdl:part name="strItemListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemListHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublicationListHttpPostIn">
+    <wsdl:part name="strPublicationListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadPublicationListHttpPostOut">
+    <wsdl:part name="Body" element="tns:PublicationList" />
+  </wsdl:message>
+  <wsdl:message name="DeletePublicationListHttpPostIn">
+    <wsdl:part name="strPublicationListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeletePublicationListHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LoadExhibitListHttpPostIn">
+    <wsdl:part name="strExhibitListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadExhibitListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ExhibitIBList" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExhibitListHttpPostIn">
+    <wsdl:part name="strExhibitListId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteExhibitListHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="ListServiceSoap">
+    <wsdl:operation name="CopyItemList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Duplications an ItemList and resets the state to New.</wsdl:documentation>
+      <wsdl:input message="tns:CopyItemListSoapIn" />
+      <wsdl:output message="tns:CopyItemListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyExhibitList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Duplications an ExhibitList and resets the state to New.</wsdl:documentation>
+      <wsdl:input message="tns:CopyExhibitListSoapIn" />
+      <wsdl:output message="tns:CopyExhibitListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemListContentHeaderSearch">
+      <wsdl:input message="tns:ItemListContentHeaderSearchSoapIn" />
+      <wsdl:output message="tns:ItemListContentHeaderSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveItemList">
+      <wsdl:input message="tns:SaveItemListSoapIn" />
+      <wsdl:output message="tns:SaveItemListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadItemList">
+      <wsdl:input message="tns:LoadItemListSoapIn" />
+      <wsdl:output message="tns:LoadItemListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteItemListSoapIn" />
+      <wsdl:output message="tns:DeleteItemListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SavePublicationList">
+      <wsdl:input message="tns:SavePublicationListSoapIn" />
+      <wsdl:output message="tns:SavePublicationListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublicationList">
+      <wsdl:input message="tns:LoadPublicationListSoapIn" />
+      <wsdl:output message="tns:LoadPublicationListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePublicationList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeletePublicationListSoapIn" />
+      <wsdl:output message="tns:DeletePublicationListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveExhibitList">
+      <wsdl:input message="tns:SaveExhibitListSoapIn" />
+      <wsdl:output message="tns:SaveExhibitListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExhibitList">
+      <wsdl:input message="tns:LoadExhibitListSoapIn" />
+      <wsdl:output message="tns:LoadExhibitListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExhibitList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExhibitListSoapIn" />
+      <wsdl:output message="tns:DeleteExhibitListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ListServiceHttpGet">
+    <wsdl:operation name="CopyItemList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Duplications an ItemList and resets the state to New.</wsdl:documentation>
+      <wsdl:input message="tns:CopyItemListHttpGetIn" />
+      <wsdl:output message="tns:CopyItemListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyExhibitList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Duplications an ExhibitList and resets the state to New.</wsdl:documentation>
+      <wsdl:input message="tns:CopyExhibitListHttpGetIn" />
+      <wsdl:output message="tns:CopyExhibitListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemListContentHeaderSearch">
+      <wsdl:input message="tns:ItemListContentHeaderSearchHttpGetIn" />
+      <wsdl:output message="tns:ItemListContentHeaderSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadItemList">
+      <wsdl:input message="tns:LoadItemListHttpGetIn" />
+      <wsdl:output message="tns:LoadItemListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteItemListHttpGetIn" />
+      <wsdl:output message="tns:DeleteItemListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublicationList">
+      <wsdl:input message="tns:LoadPublicationListHttpGetIn" />
+      <wsdl:output message="tns:LoadPublicationListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePublicationList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeletePublicationListHttpGetIn" />
+      <wsdl:output message="tns:DeletePublicationListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExhibitList">
+      <wsdl:input message="tns:LoadExhibitListHttpGetIn" />
+      <wsdl:output message="tns:LoadExhibitListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExhibitList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExhibitListHttpGetIn" />
+      <wsdl:output message="tns:DeleteExhibitListHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ListServiceHttpPost">
+    <wsdl:operation name="CopyItemList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Duplications an ItemList and resets the state to New.</wsdl:documentation>
+      <wsdl:input message="tns:CopyItemListHttpPostIn" />
+      <wsdl:output message="tns:CopyItemListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyExhibitList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Duplications an ExhibitList and resets the state to New.</wsdl:documentation>
+      <wsdl:input message="tns:CopyExhibitListHttpPostIn" />
+      <wsdl:output message="tns:CopyExhibitListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemListContentHeaderSearch">
+      <wsdl:input message="tns:ItemListContentHeaderSearchHttpPostIn" />
+      <wsdl:output message="tns:ItemListContentHeaderSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadItemList">
+      <wsdl:input message="tns:LoadItemListHttpPostIn" />
+      <wsdl:output message="tns:LoadItemListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteItemListHttpPostIn" />
+      <wsdl:output message="tns:DeleteItemListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublicationList">
+      <wsdl:input message="tns:LoadPublicationListHttpPostIn" />
+      <wsdl:output message="tns:LoadPublicationListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePublicationList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeletePublicationListHttpPostIn" />
+      <wsdl:output message="tns:DeletePublicationListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadExhibitList">
+      <wsdl:input message="tns:LoadExhibitListHttpPostIn" />
+      <wsdl:output message="tns:LoadExhibitListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExhibitList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes a list.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteExhibitListHttpPostIn" />
+      <wsdl:output message="tns:DeleteExhibitListHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ListServiceSoap" type="tns:ListServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CopyItemList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyItemList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CopyItemListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyExhibitList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyExhibitList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CopyExhibitListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemListContentHeaderSearch">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ItemListContentHeaderSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ItemListContentHeaderSearchuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveItemList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveItemList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SaveItemListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadItemList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadItemList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadItemListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteItemList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteItemListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePublicationList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SavePublicationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SavePublicationListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublicationList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadPublicationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadPublicationListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePublicationList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeletePublicationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeletePublicationListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExhibitList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveExhibitList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SaveExhibitListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExhibitList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadExhibitList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadExhibitListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExhibitList">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteExhibitList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteExhibitListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ListServiceSoap12" type="tns:ListServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CopyItemList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyItemList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CopyItemListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyExhibitList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyExhibitList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CopyExhibitListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemListContentHeaderSearch">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ItemListContentHeaderSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ItemListContentHeaderSearchuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveItemList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveItemList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SaveItemListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadItemList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadItemList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadItemListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteItemList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteItemListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SavePublicationList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SavePublicationList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SavePublicationListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublicationList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadPublicationList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadPublicationListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePublicationList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeletePublicationList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeletePublicationListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExhibitList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveExhibitList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SaveExhibitListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExhibitList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadExhibitList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadExhibitListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExhibitList">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteExhibitList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteExhibitListuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ListServiceHttpGet" type="tns:ListServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="CopyItemList">
+      <http:operation location="/CopyItemList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyExhibitList">
+      <http:operation location="/CopyExhibitList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemListContentHeaderSearch">
+      <http:operation location="/ItemListContentHeaderSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadItemList">
+      <http:operation location="/LoadItemList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemList">
+      <http:operation location="/DeleteItemList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublicationList">
+      <http:operation location="/LoadPublicationList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePublicationList">
+      <http:operation location="/DeletePublicationList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExhibitList">
+      <http:operation location="/LoadExhibitList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExhibitList">
+      <http:operation location="/DeleteExhibitList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ListServiceHttpPost" type="tns:ListServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="CopyItemList">
+      <http:operation location="/CopyItemList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyExhibitList">
+      <http:operation location="/CopyExhibitList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemListContentHeaderSearch">
+      <http:operation location="/ItemListContentHeaderSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadItemList">
+      <http:operation location="/LoadItemList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemList">
+      <http:operation location="/DeleteItemList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPublicationList">
+      <http:operation location="/LoadPublicationList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePublicationList">
+      <http:operation location="/DeletePublicationList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadExhibitList">
+      <http:operation location="/LoadExhibitList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteExhibitList">
+      <http:operation location="/DeleteExhibitList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ListService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webservice interface for list management.</wsdl:documentation>
+    <wsdl:port name="ListServiceSoap" binding="tns:ListServiceSoap">
+      <soap:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ListService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ListServiceSoap12" binding="tns:ListServiceSoap12">
+      <soap12:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ListService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ListServiceHttpGet" binding="tns:ListServiceHttpGet">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ListService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ListServiceHttpPost" binding="tns:ListServiceHttpPost">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ListService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

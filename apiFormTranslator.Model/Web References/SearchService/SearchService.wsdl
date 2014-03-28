@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.prometric.com/webservices/intelitest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.prometric.com/webservices/intelitest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Web methods for dealing with Intelitest search related calls</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.prometric.com/webservices/intelitest">
+      <s:element name="ChildrenSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="childType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parentUUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="searchDepth" type="tns:enumSearchDepth" />
+            <s:element minOccurs="1" maxOccurs="1" name="timeout" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchProviderType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="enumSearchDepth">
+        <s:restriction base="s:string">
+          <s:enumeration value="Shallow" />
+          <s:enumeration value="Deep" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ChildrenSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChildrenSearchResult" type="tns:ArrayOfSearchReference" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSearchReference">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SearchReference" nillable="true" type="tns:SearchReference" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SearchReference">
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="value" type="s:string" />
+        <s:attribute name="ref" type="s:string" />
+        <s:attribute name="display" type="s:string" />
+        <s:attribute name="type" type="s:string" />
+      </s:complexType>
+      <s:element name="user" type="tns:User" />
+      <s:complexType name="User">
+        <s:attribute name="currentContextId" type="s:string" />
+        <s:attribute name="userName" type="s:string" />
+        <s:attribute name="userId" type="s:string" />
+        <s:attribute name="authenticated" type="s:boolean" use="required" />
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="JobSearchReturningSynopsis">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strReferenceId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strStartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="strEndDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="blnAllAvailableContexts" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="JobSearchReturningSynopsisResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobSearchReturningSynopsisResult" type="tns:ArrayOfFieldListSynopsis" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFieldListSynopsis">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FieldListSynopsis" nillable="true" type="tns:FieldListSynopsis" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FieldListSynopsis">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseSynopsis">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="fields" type="tns:ArrayOfField" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseSynopsis">
+        <s:attribute name="uuid" type="s:string" />
+        <s:attribute name="referenceURL" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="field" nillable="true" type="tns:Field" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Field">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="name" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:element name="ContentSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="locationSearchDepth" type="tns:enumSearchDepth" />
+            <s:element minOccurs="0" maxOccurs="1" name="contentTypes" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="aliasValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="attributes" type="tns:ArrayOfAttribute" />
+            <s:element minOccurs="0" maxOccurs="1" name="keywords" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="statistics" type="tns:ArrayOfStatistic" />
+            <s:element minOccurs="0" maxOccurs="1" name="languages" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdOnValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdByValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedOnValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedByValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeLocked" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeUnlocked" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStringSearch">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StringSearch" nillable="true" type="tns:StringSearch" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StringSearch">
+        <s:attribute name="value" type="s:string" />
+        <s:attribute name="searchType" type="tns:enumSearchType" use="required" />
+      </s:complexType>
+      <s:simpleType name="enumSearchType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Exact" />
+          <s:enumeration value="StartsWith" />
+          <s:enumeration value="EndsWith" />
+          <s:enumeration value="Contains" />
+          <s:enumeration value="IsTrue" />
+          <s:enumeration value="IsFalse" />
+          <s:enumeration value="Is" />
+          <s:enumeration value="IsNot" />
+          <s:enumeration value="LessThanOrEqualsTo" />
+          <s:enumeration value="GreaterThanOrEqualsTo" />
+          <s:enumeration value="Exists" />
+          <s:enumeration value="Equals" />
+          <s:enumeration value="LaterThanOrEqualTo" />
+          <s:enumeration value="EarlierThanOrEqualTo" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Attribute" nillable="true" type="tns:Attribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Attribute">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="name" type="s:string" />
+            <s:attribute name="searchType" type="tns:enumSearchType" use="required" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="Statistic">
+        <s:simpleContent>
+          <s:extension base="tns:Attribute">
+            <s:attribute name="statType" type="tns:enumStatType" use="required" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:simpleType name="enumStatType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Item" />
+          <s:enumeration value="Form" />
+          <s:enumeration value="FormItem" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfStatistic">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Statistic" nillable="true" type="tns:Statistic" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ContentSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ContentSearchResult" type="tns:ArrayOfSearchReference" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ContentSearchReturningSynopsisPlus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="locationSearchDepth" type="tns:enumSearchDepth" />
+            <s:element minOccurs="0" maxOccurs="1" name="contentTypes" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="aliasValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="attributes" type="tns:ArrayOfAttribute" />
+            <s:element minOccurs="0" maxOccurs="1" name="keywords" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="comments" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="statistics" type="tns:ArrayOfStatistic" />
+            <s:element minOccurs="0" maxOccurs="1" name="languages" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdOnValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdByValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedOnValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedByValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeLocked" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeUnlocked" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="examUUIDForContentOutlineItems" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="examUUIDForReferenceListItems" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ContentSearchReturningSynopsisPlusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ContentSearchReturningSynopsisPlusResult" type="tns:ArrayOfFieldListSynopsis" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListSearchReturningSynopsis">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="locationSearchDepth" type="tns:enumSearchDepth" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="keywords" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="attributes" type="tns:ArrayOfAttribute" />
+            <s:element minOccurs="0" maxOccurs="1" name="contains" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdOnValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdByValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedOnValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedByValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeLocked" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeUnlocked" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListSearchReturningSynopsisResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListSearchReturningSynopsisResult" type="tns:ArrayOfFieldListSynopsis" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListSearch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="location" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="locationSearchDepth" type="tns:enumSearchDepth" />
+            <s:element minOccurs="0" maxOccurs="1" name="nameValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="keywords" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="attributes" type="tns:ArrayOfAttribute" />
+            <s:element minOccurs="0" maxOccurs="1" name="contains" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdOnValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="createdByValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedOnValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="0" maxOccurs="1" name="updatedByValues" type="tns:ArrayOfStringSearch" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeLocked" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="includeUnlocked" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListSearchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListSearchResult" type="tns:ArrayOfSearchReference" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfSearchReference" nillable="true" type="tns:ArrayOfSearchReference" />
+      <s:element name="ArrayOfFieldListSynopsis" nillable="true" type="tns:ArrayOfFieldListSynopsis" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ChildrenSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ChildrenSearch" />
+  </wsdl:message>
+  <wsdl:message name="ChildrenSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ChildrenSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChildrenSearchuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="JobSearchReturningSynopsisSoapIn">
+    <wsdl:part name="parameters" element="tns:JobSearchReturningSynopsis" />
+  </wsdl:message>
+  <wsdl:message name="JobSearchReturningSynopsisSoapOut">
+    <wsdl:part name="parameters" element="tns:JobSearchReturningSynopsisResponse" />
+  </wsdl:message>
+  <wsdl:message name="JobSearchReturningSynopsisuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="ContentSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ContentSearch" />
+  </wsdl:message>
+  <wsdl:message name="ContentSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ContentSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ContentSearchuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="ContentSearchReturningSynopsisPlusSoapIn">
+    <wsdl:part name="parameters" element="tns:ContentSearchReturningSynopsisPlus" />
+  </wsdl:message>
+  <wsdl:message name="ContentSearchReturningSynopsisPlusSoapOut">
+    <wsdl:part name="parameters" element="tns:ContentSearchReturningSynopsisPlusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ContentSearchReturningSynopsisPlususer">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="ListSearchReturningSynopsisSoapIn">
+    <wsdl:part name="parameters" element="tns:ListSearchReturningSynopsis" />
+  </wsdl:message>
+  <wsdl:message name="ListSearchReturningSynopsisSoapOut">
+    <wsdl:part name="parameters" element="tns:ListSearchReturningSynopsisResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListSearchReturningSynopsisuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="ListSearchSoapIn">
+    <wsdl:part name="parameters" element="tns:ListSearch" />
+  </wsdl:message>
+  <wsdl:message name="ListSearchSoapOut">
+    <wsdl:part name="parameters" element="tns:ListSearchResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListSearchuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="ChildrenSearchHttpGetIn">
+    <wsdl:part name="childType" type="s:string" />
+    <wsdl:part name="parentUUID" type="s:string" />
+    <wsdl:part name="searchDepth" type="s:string" />
+    <wsdl:part name="timeout" type="s:string" />
+    <wsdl:part name="searchProviderType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChildrenSearchHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSearchReference" />
+  </wsdl:message>
+  <wsdl:message name="JobSearchReturningSynopsisHttpGetIn">
+    <wsdl:part name="strReferenceId" type="s:string" />
+    <wsdl:part name="strStartDate" type="s:string" />
+    <wsdl:part name="strEndDate" type="s:string" />
+    <wsdl:part name="blnAllAvailableContexts" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="JobSearchReturningSynopsisHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfFieldListSynopsis" />
+  </wsdl:message>
+  <wsdl:message name="ChildrenSearchHttpPostIn">
+    <wsdl:part name="childType" type="s:string" />
+    <wsdl:part name="parentUUID" type="s:string" />
+    <wsdl:part name="searchDepth" type="s:string" />
+    <wsdl:part name="timeout" type="s:string" />
+    <wsdl:part name="searchProviderType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChildrenSearchHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfSearchReference" />
+  </wsdl:message>
+  <wsdl:message name="JobSearchReturningSynopsisHttpPostIn">
+    <wsdl:part name="strReferenceId" type="s:string" />
+    <wsdl:part name="strStartDate" type="s:string" />
+    <wsdl:part name="strEndDate" type="s:string" />
+    <wsdl:part name="blnAllAvailableContexts" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="JobSearchReturningSynopsisHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfFieldListSynopsis" />
+  </wsdl:message>
+  <wsdl:portType name="SearchServiceSoap">
+    <wsdl:operation name="ChildrenSearch">
+      <wsdl:input message="tns:ChildrenSearchSoapIn" />
+      <wsdl:output message="tns:ChildrenSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JobSearchReturningSynopsis">
+      <wsdl:input message="tns:JobSearchReturningSynopsisSoapIn" />
+      <wsdl:output message="tns:JobSearchReturningSynopsisSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ContentSearch">
+      <wsdl:input message="tns:ContentSearchSoapIn" />
+      <wsdl:output message="tns:ContentSearchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ContentSearchReturningSynopsisPlus">
+      <wsdl:input message="tns:ContentSearchReturningSynopsisPlusSoapIn" />
+      <wsdl:output message="tns:ContentSearchReturningSynopsisPlusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListSearchReturningSynopsis">
+      <wsdl:input message="tns:ListSearchReturningSynopsisSoapIn" />
+      <wsdl:output message="tns:ListSearchReturningSynopsisSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListSearch">
+      <wsdl:input message="tns:ListSearchSoapIn" />
+      <wsdl:output message="tns:ListSearchSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SearchServiceHttpGet">
+    <wsdl:operation name="ChildrenSearch">
+      <wsdl:input message="tns:ChildrenSearchHttpGetIn" />
+      <wsdl:output message="tns:ChildrenSearchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JobSearchReturningSynopsis">
+      <wsdl:input message="tns:JobSearchReturningSynopsisHttpGetIn" />
+      <wsdl:output message="tns:JobSearchReturningSynopsisHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SearchServiceHttpPost">
+    <wsdl:operation name="ChildrenSearch">
+      <wsdl:input message="tns:ChildrenSearchHttpPostIn" />
+      <wsdl:output message="tns:ChildrenSearchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="JobSearchReturningSynopsis">
+      <wsdl:input message="tns:JobSearchReturningSynopsisHttpPostIn" />
+      <wsdl:output message="tns:JobSearchReturningSynopsisHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SearchServiceSoap" type="tns:SearchServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ChildrenSearch">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ChildrenSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ChildrenSearchuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JobSearchReturningSynopsis">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/JobSearchReturningSynopsis" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:JobSearchReturningSynopsisuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ContentSearch">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ContentSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ContentSearchuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ContentSearchReturningSynopsisPlus">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ContentSearchReturningSynopsisPlus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ContentSearchReturningSynopsisPlususer" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListSearchReturningSynopsis">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ListSearchReturningSynopsis" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ListSearchReturningSynopsisuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListSearch">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ListSearch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ListSearchuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SearchServiceSoap12" type="tns:SearchServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ChildrenSearch">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ChildrenSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ChildrenSearchuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JobSearchReturningSynopsis">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/JobSearchReturningSynopsis" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:JobSearchReturningSynopsisuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ContentSearch">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ContentSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ContentSearchuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ContentSearchReturningSynopsisPlus">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ContentSearchReturningSynopsisPlus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ContentSearchReturningSynopsisPlususer" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListSearchReturningSynopsis">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ListSearchReturningSynopsis" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ListSearchReturningSynopsisuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListSearch">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ListSearch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ListSearchuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SearchServiceHttpGet" type="tns:SearchServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="ChildrenSearch">
+      <http:operation location="/ChildrenSearch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JobSearchReturningSynopsis">
+      <http:operation location="/JobSearchReturningSynopsis" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SearchServiceHttpPost" type="tns:SearchServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ChildrenSearch">
+      <http:operation location="/ChildrenSearch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JobSearchReturningSynopsis">
+      <http:operation location="/JobSearchReturningSynopsis" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SearchService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Web methods for dealing with Intelitest search related calls</wsdl:documentation>
+    <wsdl:port name="SearchServiceSoap" binding="tns:SearchServiceSoap">
+      <soap:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SearchService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SearchServiceSoap12" binding="tns:SearchServiceSoap12">
+      <soap12:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SearchService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SearchServiceHttpGet" binding="tns:SearchServiceHttpGet">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SearchService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SearchServiceHttpPost" binding="tns:SearchServiceHttpPost">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SearchService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

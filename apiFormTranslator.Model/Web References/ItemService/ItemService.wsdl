@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.prometric.com/webservices/intelitest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.prometric.com/webservices/intelitest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Item management web service.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.prometric.com/webservices/intelitest">
+      <s:element name="SaveItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obj" type="tns:Item" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Item">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ListOfAssets" type="tns:ArrayOfAssetListStructure" />
+          <s:element minOccurs="0" maxOccurs="1" name="Keywords" type="tns:ContentKeyword" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomAttributes" type="tns:ArrayOfCustomAttribute" />
+          <s:element minOccurs="1" maxOccurs="1" name="IRTAParam" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IRTBParam" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IRTCParam" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IRTAParamStdErr" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IRTBParamStdErr" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="IRTCParamStdErr" type="s:decimal" />
+        </s:sequence>
+        <s:attribute name="id" type="s:string" />
+        <s:attribute name="name" type="s:string" />
+        <s:attribute name="description" type="s:string" />
+        <s:attribute name="revision" type="s:string" />
+        <s:attribute name="version" type="s:float" use="required" />
+        <s:attribute name="typeId" type="s:string" />
+        <s:attribute name="typeName" type="s:string" />
+        <s:attribute name="ownerid" type="s:string" />
+        <s:attribute name="locked" type="s:boolean" use="required" />
+        <s:attribute name="platform" type="s:string" />
+        <s:attribute name="layoutid" type="s:string" />
+        <s:attribute name="utd_promptrequired" type="s:boolean" use="required" />
+        <s:attribute name="prompt" type="s:string" />
+        <s:attribute name="utd_scored" type="s:boolean" use="required" />
+        <s:attribute name="state" type="s:string" />
+        <s:attribute name="status" type="s:string" />
+        <s:attribute name="folderuuid" type="s:string" />
+        <s:attribute name="editornotes" type="s:string" />
+        <s:attribute name="language" type="s:string" />
+        <s:attribute name="cognitivelevel" type="s:string" />
+        <s:attribute name="createdon" type="s:string" />
+        <s:attribute name="createdby" type="s:string" />
+        <s:attribute name="updatedon" type="s:string" />
+        <s:attribute name="updatedby" type="s:string" />
+        <s:attribute name="importlabel" type="s:string" />
+        <s:attribute name="importdate" type="s:string" />
+        <s:attribute name="utd_skipallowed" type="s:boolean" use="required" />
+        <s:attribute name="prometricowned" type="s:boolean" use="required" />
+        <s:attribute name="rawKeywordDelimitedString" type="s:string" />
+        <s:attribute name="mastercode" type="s:string" />
+        <s:attribute name="AltID" type="s:string" />
+        <s:attribute name="ItemWriter" type="s:string" />
+        <s:attribute name="icscode" type="s:string" />
+        <s:attribute name="importcode" type="s:string" />
+        <s:attribute name="negativestem" type="s:boolean" use="required" />
+        <s:attribute name="romannumeral" type="s:boolean" use="required" />
+        <s:attribute name="goalaction" type="s:boolean" use="required" />
+        <s:attribute name="difficulty" type="s:string" />
+        <s:attribute name="multikey" type="s:string" />
+        <s:attribute name="openbookindicator" type="s:boolean" use="required" />
+        <s:attribute name="estimateddifficulty" type="s:string" />
+        <s:attribute name="itemtypecss" type="s:string" />
+        <s:attribute name="itemcontentcss" type="s:string" />
+        <s:attribute name="itempresentationindicator" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfAssetListStructure">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AssetListStructure" nillable="true" type="tns:AssetListStructure" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AssetListStructure">
+        <s:attribute name="assetid" type="s:string" />
+        <s:attribute name="assettag" type="s:string" />
+        <s:attribute name="assettitle" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ContentKeyword">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="keywords" type="tns:ArrayOfKeyword" />
+        </s:sequence>
+        <s:attribute name="contentId" type="s:string" />
+        <s:attribute name="overwrite" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfKeyword">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="keyword" nillable="true" type="tns:Keyword" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Keyword">
+        <s:attribute name="value" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomAttribute" nillable="true" type="tns:CustomAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomAttribute">
+        <s:attribute name="id" type="s:string" />
+        <s:attribute name="internalName" type="s:string" />
+        <s:attribute name="displayName" type="s:string" />
+        <s:attribute name="displayValue" type="s:string" />
+        <s:attribute name="ordinal" type="s:int" use="required" />
+        <s:attribute name="utcCreateDateTime" type="s:dateTime" use="required" />
+        <s:attribute name="utcModifiedDateTime" type="s:dateTime" use="required" />
+        <s:attribute name="createUser" type="s:string" />
+        <s:attribute name="modifiedUser" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ItemFreeForm" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Item">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="textBoxes" type="tns:ArrayOfFreeFormTextBox" />
+            </s:sequence>
+            <s:attribute name="stem" type="s:string" />
+            <s:attribute name="stemRationale" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfFreeFormTextBox">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="textBox" nillable="true" type="tns:FreeFormTextBox" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FreeFormTextBox" abstract="true">
+        <s:attribute name="maxResponseLength" type="s:int" use="required" />
+        <s:attribute name="width" type="s:int" use="required" />
+        <s:attribute name="height" type="s:int" use="required" />
+        <s:attribute name="fontType" type="s:string" />
+        <s:attribute name="fontSize" type="s:int" use="required" />
+        <s:attribute name="backgroundColor" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="FreeFormEssayTextBox">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:FreeFormTextBox">
+            <s:attribute name="isJudged" type="s:boolean" use="required" />
+            <s:attribute name="key" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FreeFormShortAnswerTextBox">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:FreeFormTextBox">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="correctExpressions" type="tns:ArrayOfString" />
+            </s:sequence>
+            <s:attribute name="isMatched" type="s:boolean" use="required" />
+            <s:attribute name="ignoreCase" type="s:boolean" use="required" />
+            <s:attribute name="ignoreWhiteSpace" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="correctExpression" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemFreeFormShortAnswer">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ItemFreeForm" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemFreeFormEssay">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ItemFreeForm" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PBTCoversheet">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Item">
+            <s:attribute name="header" type="s:string" />
+            <s:attribute name="footer" type="s:string" />
+            <s:attribute name="testdirections" type="s:string" />
+            <s:attribute name="maincoversheettext" type="s:string" />
+            <s:attribute name="coversheetname" type="s:string" />
+            <s:attribute name="pagenumbering" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemSetHeader">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Item">
+            <s:attribute name="setheader" type="s:string" />
+            <s:attribute name="setheaderrationale" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemDragAndDrop">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Item">
+            <s:attribute name="draganddropxml" type="s:string" />
+            <s:attribute name="stem" type="s:string" />
+            <s:attribute name="stemrationale" type="s:string" />
+            <s:attribute name="maxresponses" type="s:string" />
+            <s:attribute name="minresponses" type="s:string" />
+            <s:attribute name="minresponsemessage" type="s:string" />
+            <s:attribute name="maxresponsemessage" type="s:string" />
+            <s:attribute name="utd_maxscore" type="s:string" />
+            <s:attribute name="utd_minscore" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemHotSpot">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Item">
+            <s:attribute name="polygonresults" type="s:string" />
+            <s:attribute name="assetbackground" type="s:string" />
+            <s:attribute name="hotspotstem" type="s:string" />
+            <s:attribute name="hotspotstemrationale" type="s:string" />
+            <s:attribute name="hsmultikey" type="s:string" />
+            <s:attribute name="maxresponses" type="s:string" />
+            <s:attribute name="minresponses" type="s:string" />
+            <s:attribute name="minresponsemessage" type="s:string" />
+            <s:attribute name="maxresponsemessage" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemMCQ">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Item">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ListOfOptions" type="tns:ArrayOfItemOption" />
+            </s:sequence>
+            <s:attribute name="header" type="s:string" />
+            <s:attribute name="stem" type="s:string" />
+            <s:attribute name="stemrationale" type="s:string" />
+            <s:attribute name="utd_autoprompt" type="s:boolean" use="required" />
+            <s:attribute name="utd_buttonimage" type="s:string" />
+            <s:attribute name="utd_buttonimagepress" type="s:string" />
+            <s:attribute name="utd_buttonalttext" type="s:string" />
+            <s:attribute name="utd_buttonaltpresstext" type="s:string" />
+            <s:attribute name="utd_enablestrikeout" type="s:boolean" use="required" />
+            <s:attribute name="OptionDesignator" type="s:string" />
+            <s:attribute name="optionsorttype" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfItemOption">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ItemOption" nillable="true" type="tns:ItemOption" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemOption">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OptionText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sequence" type="s:unsignedInt" />
+          <s:element minOccurs="1" maxOccurs="1" name="Weight" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Key" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rationale" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ItemMCMRD">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ItemMCQ">
+            <s:attribute name="dichotomous" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemMCQSR">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ItemMCQ">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Weight" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ItemMCQMR">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ItemMCQ">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="MinResponses" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MaxResponses" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UTD_TooMany" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UTD_TooFew" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UTD_MinScore" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UTD_MaxScore" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MinResponseMsg" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MaxResponseMsg" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SaveItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveItemResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="user" type="tns:User" />
+      <s:complexType name="User">
+        <s:attribute name="currentContextId" type="s:string" />
+        <s:attribute name="userName" type="s:string" />
+        <s:attribute name="userId" type="s:string" />
+        <s:attribute name="authenticated" type="s:boolean" use="required" />
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="DeleteItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteItemResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="LoadItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="itemId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadItemResult" type="tns:Item" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyItem">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sourceId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="destinationMastercode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="copyType" type="tns:ItemCopyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="ItemCopyType">
+        <s:restriction base="s:string">
+          <s:enumeration value="LANGUAGE" />
+          <s:enumeration value="CHILD" />
+          <s:enumeration value="SIBLING" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="CopyItemResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CopyItemResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ItemIdsFromMasterCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="masterCodes" type="tns:ArrayOfString1" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ItemIdsFromMasterCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ItemIdsFromMasterCodesResult" type="tns:ArrayOfString1" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Item" nillable="true" type="tns:Item" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SaveItemSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveItem" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveItemuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteItem" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadItem" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyItem" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="ItemIdsFromMasterCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:ItemIdsFromMasterCodes" />
+  </wsdl:message>
+  <wsdl:message name="ItemIdsFromMasterCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:ItemIdsFromMasterCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ItemIdsFromMasterCodesuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemHttpGetIn">
+    <wsdl:part name="itemId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemHttpGetOut" />
+  <wsdl:message name="LoadItemHttpGetIn">
+    <wsdl:part name="itemId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemHttpGetOut">
+    <wsdl:part name="Body" element="tns:Item" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemHttpGetIn">
+    <wsdl:part name="sourceId" type="s:string" />
+    <wsdl:part name="destinationMastercode" type="s:string" />
+    <wsdl:part name="copyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemHttpPostIn">
+    <wsdl:part name="itemId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteItemHttpPostOut" />
+  <wsdl:message name="LoadItemHttpPostIn">
+    <wsdl:part name="itemId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadItemHttpPostOut">
+    <wsdl:part name="Body" element="tns:Item" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemHttpPostIn">
+    <wsdl:part name="sourceId" type="s:string" />
+    <wsdl:part name="destinationMastercode" type="s:string" />
+    <wsdl:part name="copyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyItemHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="ItemServiceSoap">
+    <wsdl:operation name="SaveItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Saves an item.</wsdl:documentation>
+      <wsdl:input message="tns:SaveItemSoapIn" />
+      <wsdl:output message="tns:SaveItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an item.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteItemSoapIn" />
+      <wsdl:output message="tns:DeleteItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an item.</wsdl:documentation>
+      <wsdl:input message="tns:LoadItemSoapIn" />
+      <wsdl:output message="tns:LoadItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an item.</wsdl:documentation>
+      <wsdl:input message="tns:CopyItemSoapIn" />
+      <wsdl:output message="tns:CopyItemSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ItemIdsFromMasterCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a List of Item Ids from a list of Master Codes</wsdl:documentation>
+      <wsdl:input message="tns:ItemIdsFromMasterCodesSoapIn" />
+      <wsdl:output message="tns:ItemIdsFromMasterCodesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ItemServiceHttpGet">
+    <wsdl:operation name="DeleteItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an item.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteItemHttpGetIn" />
+      <wsdl:output message="tns:DeleteItemHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an item.</wsdl:documentation>
+      <wsdl:input message="tns:LoadItemHttpGetIn" />
+      <wsdl:output message="tns:LoadItemHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an item.</wsdl:documentation>
+      <wsdl:input message="tns:CopyItemHttpGetIn" />
+      <wsdl:output message="tns:CopyItemHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ItemServiceHttpPost">
+    <wsdl:operation name="DeleteItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Deletes an item.</wsdl:documentation>
+      <wsdl:input message="tns:DeleteItemHttpPostIn" />
+      <wsdl:output message="tns:DeleteItemHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Loads an item.</wsdl:documentation>
+      <wsdl:input message="tns:LoadItemHttpPostIn" />
+      <wsdl:output message="tns:LoadItemHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Copies an item.</wsdl:documentation>
+      <wsdl:input message="tns:CopyItemHttpPostIn" />
+      <wsdl:output message="tns:CopyItemHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ItemServiceSoap" type="tns:ItemServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveItem">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:SaveItemuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteItemuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadItem">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadItemuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CopyItemuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemIdsFromMasterCodes">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/ItemIdsFromMasterCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ItemIdsFromMasterCodesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ItemServiceSoap12" type="tns:ItemServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveItem">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/SaveItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:SaveItemuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItem">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/DeleteItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteItemuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadItem">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadItemuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CopyItem" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CopyItemuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ItemIdsFromMasterCodes">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/ItemIdsFromMasterCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ItemIdsFromMasterCodesuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ItemServiceHttpGet" type="tns:ItemServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="DeleteItem">
+      <http:operation location="/DeleteItem" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LoadItem">
+      <http:operation location="/LoadItem" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <http:operation location="/CopyItem" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ItemServiceHttpPost" type="tns:ItemServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="DeleteItem">
+      <http:operation location="/DeleteItem" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="LoadItem">
+      <http:operation location="/LoadItem" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyItem">
+      <http:operation location="/CopyItem" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ItemService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Item management web service.</wsdl:documentation>
+    <wsdl:port name="ItemServiceSoap" binding="tns:ItemServiceSoap">
+      <soap:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ItemService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ItemServiceSoap12" binding="tns:ItemServiceSoap12">
+      <soap12:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ItemService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ItemServiceHttpGet" binding="tns:ItemServiceHttpGet">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ItemService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ItemServiceHttpPost" binding="tns:ItemServiceHttpPost">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ItemService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.prometric.com/webservices/intelitest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.prometric.com/webservices/intelitest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.prometric.com/webservices/intelitest">
+      <s:element name="GetUniqueCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="contextid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sequencer" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUniqueCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUniqueCodeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="user" type="tns:User" />
+      <s:complexType name="User">
+        <s:attribute name="currentContextId" type="s:string" />
+        <s:attribute name="userName" type="s:string" />
+        <s:attribute name="userId" type="s:string" />
+        <s:attribute name="authenticated" type="s:boolean" use="required" />
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="CheckCodeExists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="typename" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contextid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckCodeExistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckCodeExistsResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetUniqueCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUniqueCode" />
+  </wsdl:message>
+  <wsdl:message name="GetUniqueCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUniqueCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUniqueCodeuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="CheckCodeExistsSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckCodeExists" />
+  </wsdl:message>
+  <wsdl:message name="CheckCodeExistsSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckCodeExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckCodeExistsuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetUniqueCodeHttpGetIn">
+    <wsdl:part name="contextid" type="s:string" />
+    <wsdl:part name="sequencer" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUniqueCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckCodeExistsHttpGetIn">
+    <wsdl:part name="typename" type="s:string" />
+    <wsdl:part name="code" type="s:string" />
+    <wsdl:part name="contextid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckCodeExistsHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetUniqueCodeHttpPostIn">
+    <wsdl:part name="contextid" type="s:string" />
+    <wsdl:part name="sequencer" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUniqueCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckCodeExistsHttpPostIn">
+    <wsdl:part name="typename" type="s:string" />
+    <wsdl:part name="code" type="s:string" />
+    <wsdl:part name="contextid" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckCodeExistsHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="AutoGenCodeWebServiceSoap">
+    <wsdl:operation name="GetUniqueCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a unique code given a contextid and sequence number (Optional)</wsdl:documentation>
+      <wsdl:input message="tns:GetUniqueCodeSoapIn" />
+      <wsdl:output message="tns:GetUniqueCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExists">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks to see if the code exists in the DB.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCodeExistsSoapIn" />
+      <wsdl:output message="tns:CheckCodeExistsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AutoGenCodeWebServiceHttpGet">
+    <wsdl:operation name="GetUniqueCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a unique code given a contextid and sequence number (Optional)</wsdl:documentation>
+      <wsdl:input message="tns:GetUniqueCodeHttpGetIn" />
+      <wsdl:output message="tns:GetUniqueCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExists">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks to see if the code exists in the DB.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCodeExistsHttpGetIn" />
+      <wsdl:output message="tns:CheckCodeExistsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AutoGenCodeWebServiceHttpPost">
+    <wsdl:operation name="GetUniqueCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates a unique code given a contextid and sequence number (Optional)</wsdl:documentation>
+      <wsdl:input message="tns:GetUniqueCodeHttpPostIn" />
+      <wsdl:output message="tns:GetUniqueCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExists">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks to see if the code exists in the DB.</wsdl:documentation>
+      <wsdl:input message="tns:CheckCodeExistsHttpPostIn" />
+      <wsdl:output message="tns:CheckCodeExistsHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AutoGenCodeWebServiceSoap" type="tns:AutoGenCodeWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUniqueCode">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUniqueCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUniqueCodeuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExists">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/CheckCodeExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CheckCodeExistsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AutoGenCodeWebServiceSoap12" type="tns:AutoGenCodeWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUniqueCode">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetUniqueCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUniqueCodeuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExists">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/CheckCodeExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CheckCodeExistsuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AutoGenCodeWebServiceHttpGet" type="tns:AutoGenCodeWebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetUniqueCode">
+      <http:operation location="/GetUniqueCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExists">
+      <http:operation location="/CheckCodeExists" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AutoGenCodeWebServiceHttpPost" type="tns:AutoGenCodeWebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetUniqueCode">
+      <http:operation location="/GetUniqueCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckCodeExists">
+      <http:operation location="/CheckCodeExists" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AutoGenCodeWebService">
+    <wsdl:port name="AutoGenCodeWebServiceSoap" binding="tns:AutoGenCodeWebServiceSoap">
+      <soap:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/Public/AutoGenCodeWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AutoGenCodeWebServiceSoap12" binding="tns:AutoGenCodeWebServiceSoap12">
+      <soap12:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/Public/AutoGenCodeWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AutoGenCodeWebServiceHttpGet" binding="tns:AutoGenCodeWebServiceHttpGet">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/Public/AutoGenCodeWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AutoGenCodeWebServiceHttpPost" binding="tns:AutoGenCodeWebServiceHttpPost">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/Public/AutoGenCodeWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

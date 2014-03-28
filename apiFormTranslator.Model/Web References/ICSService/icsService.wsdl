@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.prometric.com/webservices/intelitest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.prometric.com/webservices/intelitest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.prometric.com/webservices/intelitest">
+      <s:element name="LoadICSFolder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="folderId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadICSFolderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadICSFolderResult" type="tns:ICSNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ICSNode">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Folder">
+            <s:attribute name="ICSCode" type="s:string" />
+            <s:attribute name="ICSPath" type="s:string" />
+            <s:attribute name="Title" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Folder">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FolderName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FolderId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FolderTypeId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FolderTypeName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsLocked" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsHidden" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSystem" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="utcCreateDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="utcLockedDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="utcModifiedDateTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ModifiedUser" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="user" type="tns:User" />
+      <s:complexType name="User">
+        <s:attribute name="currentContextId" type="s:string" />
+        <s:attribute name="userName" type="s:string" />
+        <s:attribute name="userId" type="s:string" />
+        <s:attribute name="authenticated" type="s:boolean" use="required" />
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="AddICSNode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parentFolderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icsNode" type="tns:ICSNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddICSNodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddICSNodeResult" type="tns:ICSNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddICSNodeToParent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parentFolderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="icsNode" type="tns:ICSNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddICSNodeToParentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddICSNodeToParentResult" type="tns:ICSNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddICSNodeByPath">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="icsPath" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddICSNodeByPathResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddICSNodeByPathResult" type="tns:ICSNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetICSNodeRootFolderName">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetICSNodeRootFolderNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetICSNodeRootFolderNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditIcsNode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="icsNode" type="tns:ICSNode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditIcsNodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EditIcsNodeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MoveIcsNode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sourceFolderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="targetFolderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="movingElementId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MoveIcsNodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="MoveIcsNodeResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetICSNodeRootFolder">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetICSNodeRootFolderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetICSNodeRootFolderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ICSNode" nillable="true" type="tns:ICSNode" />
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoadICSFolderSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadICSFolder" />
+  </wsdl:message>
+  <wsdl:message name="LoadICSFolderSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadICSFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadICSFolderuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeSoapIn">
+    <wsdl:part name="parameters" element="tns:AddICSNode" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeSoapOut">
+    <wsdl:part name="parameters" element="tns:AddICSNodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeToParentSoapIn">
+    <wsdl:part name="parameters" element="tns:AddICSNodeToParent" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeToParentSoapOut">
+    <wsdl:part name="parameters" element="tns:AddICSNodeToParentResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeToParentuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeByPathSoapIn">
+    <wsdl:part name="parameters" element="tns:AddICSNodeByPath" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeByPathSoapOut">
+    <wsdl:part name="parameters" element="tns:AddICSNodeByPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeByPathuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetICSNodeRootFolderName" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetICSNodeRootFolderNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderNameuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="EditIcsNodeSoapIn">
+    <wsdl:part name="parameters" element="tns:EditIcsNode" />
+  </wsdl:message>
+  <wsdl:message name="EditIcsNodeSoapOut">
+    <wsdl:part name="parameters" element="tns:EditIcsNodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditIcsNodeuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="MoveIcsNodeSoapIn">
+    <wsdl:part name="parameters" element="tns:MoveIcsNode" />
+  </wsdl:message>
+  <wsdl:message name="MoveIcsNodeSoapOut">
+    <wsdl:part name="parameters" element="tns:MoveIcsNodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="MoveIcsNodeuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderSoapIn">
+    <wsdl:part name="parameters" element="tns:GetICSNodeRootFolder" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderSoapOut">
+    <wsdl:part name="parameters" element="tns:GetICSNodeRootFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderuser">
+    <wsdl:part name="user" element="tns:user" />
+  </wsdl:message>
+  <wsdl:message name="LoadICSFolderHttpGetIn">
+    <wsdl:part name="folderId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadICSFolderHttpGetOut">
+    <wsdl:part name="Body" element="tns:ICSNode" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeByPathHttpGetIn">
+    <wsdl:part name="icsPath" type="s:string" />
+    <wsdl:part name="title" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeByPathHttpGetOut">
+    <wsdl:part name="Body" element="tns:ICSNode" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderNameHttpGetIn" />
+  <wsdl:message name="GetICSNodeRootFolderNameHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="MoveIcsNodeHttpGetIn">
+    <wsdl:part name="sourceFolderId" type="s:string" />
+    <wsdl:part name="targetFolderId" type="s:string" />
+    <wsdl:part name="movingElementId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MoveIcsNodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderHttpGetIn" />
+  <wsdl:message name="GetICSNodeRootFolderHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadICSFolderHttpPostIn">
+    <wsdl:part name="folderId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadICSFolderHttpPostOut">
+    <wsdl:part name="Body" element="tns:ICSNode" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeByPathHttpPostIn">
+    <wsdl:part name="icsPath" type="s:string" />
+    <wsdl:part name="title" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddICSNodeByPathHttpPostOut">
+    <wsdl:part name="Body" element="tns:ICSNode" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderNameHttpPostIn" />
+  <wsdl:message name="GetICSNodeRootFolderNameHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="MoveIcsNodeHttpPostIn">
+    <wsdl:part name="sourceFolderId" type="s:string" />
+    <wsdl:part name="targetFolderId" type="s:string" />
+    <wsdl:part name="movingElementId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MoveIcsNodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetICSNodeRootFolderHttpPostIn" />
+  <wsdl:message name="GetICSNodeRootFolderHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="ICSServiceSoap">
+    <wsdl:operation name="LoadICSFolder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ICSNode.</wsdl:documentation>
+      <wsdl:input message="tns:LoadICSFolderSoapIn" />
+      <wsdl:output message="tns:LoadICSFolderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Links the passed ICSNode to the provided Folder</wsdl:documentation>
+      <wsdl:input message="tns:AddICSNodeSoapIn" />
+      <wsdl:output message="tns:AddICSNodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeToParent">
+      <wsdl:input message="tns:AddICSNodeToParentSoapIn" />
+      <wsdl:output message="tns:AddICSNodeToParentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeByPath">
+      <wsdl:input message="tns:AddICSNodeByPathSoapIn" />
+      <wsdl:output message="tns:AddICSNodeByPathSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolderName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the Name of the ICS Node Root Folder.</wsdl:documentation>
+      <wsdl:input message="tns:GetICSNodeRootFolderNameSoapIn" />
+      <wsdl:output message="tns:GetICSNodeRootFolderNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditIcsNode">
+      <wsdl:input message="tns:EditIcsNodeSoapIn" />
+      <wsdl:output message="tns:EditIcsNodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveIcsNode">
+      <wsdl:input message="tns:MoveIcsNodeSoapIn" />
+      <wsdl:output message="tns:MoveIcsNodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the UUID of the ICS Node Root Folder.</wsdl:documentation>
+      <wsdl:input message="tns:GetICSNodeRootFolderSoapIn" />
+      <wsdl:output message="tns:GetICSNodeRootFolderSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ICSServiceHttpGet">
+    <wsdl:operation name="LoadICSFolder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ICSNode.</wsdl:documentation>
+      <wsdl:input message="tns:LoadICSFolderHttpGetIn" />
+      <wsdl:output message="tns:LoadICSFolderHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeByPath">
+      <wsdl:input message="tns:AddICSNodeByPathHttpGetIn" />
+      <wsdl:output message="tns:AddICSNodeByPathHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolderName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the Name of the ICS Node Root Folder.</wsdl:documentation>
+      <wsdl:input message="tns:GetICSNodeRootFolderNameHttpGetIn" />
+      <wsdl:output message="tns:GetICSNodeRootFolderNameHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveIcsNode">
+      <wsdl:input message="tns:MoveIcsNodeHttpGetIn" />
+      <wsdl:output message="tns:MoveIcsNodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the UUID of the ICS Node Root Folder.</wsdl:documentation>
+      <wsdl:input message="tns:GetICSNodeRootFolderHttpGetIn" />
+      <wsdl:output message="tns:GetICSNodeRootFolderHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ICSServiceHttpPost">
+    <wsdl:operation name="LoadICSFolder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieve a single ICSNode.</wsdl:documentation>
+      <wsdl:input message="tns:LoadICSFolderHttpPostIn" />
+      <wsdl:output message="tns:LoadICSFolderHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeByPath">
+      <wsdl:input message="tns:AddICSNodeByPathHttpPostIn" />
+      <wsdl:output message="tns:AddICSNodeByPathHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolderName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the Name of the ICS Node Root Folder.</wsdl:documentation>
+      <wsdl:input message="tns:GetICSNodeRootFolderNameHttpPostIn" />
+      <wsdl:output message="tns:GetICSNodeRootFolderNameHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveIcsNode">
+      <wsdl:input message="tns:MoveIcsNodeHttpPostIn" />
+      <wsdl:output message="tns:MoveIcsNodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolder">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets the UUID of the ICS Node Root Folder.</wsdl:documentation>
+      <wsdl:input message="tns:GetICSNodeRootFolderHttpPostIn" />
+      <wsdl:output message="tns:GetICSNodeRootFolderHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ICSServiceSoap" type="tns:ICSServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoadICSFolder">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadICSFolder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:LoadICSFolderuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNode">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AddICSNode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddICSNodeuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeToParent">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AddICSNodeToParent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddICSNodeToParentuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeByPath">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/AddICSNodeByPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AddICSNodeByPathuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolderName">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetICSNodeRootFolderName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetICSNodeRootFolderNameuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditIcsNode">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/EditIcsNode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:EditIcsNodeuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveIcsNode">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/MoveIcsNode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:MoveIcsNodeuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolder">
+      <soap:operation soapAction="http://www.prometric.com/webservices/intelitest/GetICSNodeRootFolder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetICSNodeRootFolderuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ICSServiceSoap12" type="tns:ICSServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoadICSFolder">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/LoadICSFolder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:LoadICSFolderuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNode">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AddICSNode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AddICSNodeuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeToParent">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AddICSNodeToParent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AddICSNodeToParentuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeByPath">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/AddICSNodeByPath" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AddICSNodeByPathuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolderName">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetICSNodeRootFolderName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetICSNodeRootFolderNameuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditIcsNode">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/EditIcsNode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:EditIcsNodeuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveIcsNode">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/MoveIcsNode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:MoveIcsNodeuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolder">
+      <soap12:operation soapAction="http://www.prometric.com/webservices/intelitest/GetICSNodeRootFolder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetICSNodeRootFolderuser" part="user" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ICSServiceHttpGet" type="tns:ICSServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="LoadICSFolder">
+      <http:operation location="/LoadICSFolder" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeByPath">
+      <http:operation location="/AddICSNodeByPath" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolderName">
+      <http:operation location="/GetICSNodeRootFolderName" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveIcsNode">
+      <http:operation location="/MoveIcsNode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolder">
+      <http:operation location="/GetICSNodeRootFolder" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ICSServiceHttpPost" type="tns:ICSServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="LoadICSFolder">
+      <http:operation location="/LoadICSFolder" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddICSNodeByPath">
+      <http:operation location="/AddICSNodeByPath" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolderName">
+      <http:operation location="/GetICSNodeRootFolderName" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveIcsNode">
+      <http:operation location="/MoveIcsNode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetICSNodeRootFolder">
+      <http:operation location="/GetICSNodeRootFolder" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ICSService">
+    <wsdl:port name="ICSServiceSoap" binding="tns:ICSServiceSoap">
+      <soap:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/icsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ICSServiceSoap12" binding="tns:ICSServiceSoap12">
+      <soap12:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/icsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ICSServiceHttpGet" binding="tns:ICSServiceHttpGet">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/icsService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ICSServiceHttpPost" binding="tns:ICSServiceHttpPost">
+      <http:address location="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/icsService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

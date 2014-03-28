@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="apiFormTranslator.Model.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="apiFormTranslator_Model_SecurityService_SecurityService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SecurityService.asmx</Value>
+    </Setting>
+    <Setting Name="apiFormTranslator_Model_ItemService_ItemService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ItemService.asmx</Value>
+    </Setting>
+    <Setting Name="apiFormTranslator_Model_ExamService_ExamService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ExamService.asmx</Value>
+    </Setting>
+    <Setting Name="apiFormTranslator_Model_ListService_ListService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/ListService.asmx</Value>
+    </Setting>
+    <Setting Name="apiFormTranslator_Model_SearchService_SearchService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/SearchService.asmx</Value>
+    </Setting>
+    <Setting Name="apiFormTranslator_Model_icsService_ICSService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/icsService.asmx</Value>
+    </Setting>
+    <Setting Name="apiFormTranslator_Model_AutoGenCodeWebService_AutoGenCodeWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/Public/AutoGenCodeWebService.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

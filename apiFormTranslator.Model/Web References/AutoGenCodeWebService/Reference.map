@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/Public/AutoGenCodeWebService.asmx?wsdl" filename="AutoGenCodeWebService.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.DiscoveryDocumentReference" url="http://bil-itest2-app.prometric.qc2/IntelitestWS/WebServices/Public/AutoGenCodeWebService.asmx?disco" filename="AutoGenCodeWebService.disco" />
+  </Results>
+</DiscoveryClientResultsFile>

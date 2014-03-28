@@ -1,0 +1,100 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Unit Tests", "0. Unit Tests", "{A718B274-D849-430F-B365-DD766A00D86A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Data Access Layer", "1. Data Access Layer", "{20FA3F93-8683-472F-9558-0D75C15EA85C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Business Logic Layer", "2. Business Logic Layer", "{7B158C08-F1CF-4FCA-9A3B-7B854BF5F4BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Service Layer", "3. Service Layer", "{4ED57FD3-BCBD-43D6-930C-A614EE79C45D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Presentation Layer", "4. Presentation Layer", "{3F0D6A05-EE64-47D9-8FDE-42D78BA4E977}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. User Interface Layer", "5. User Interface Layer", "{757F5423-5F4D-4D7F-B8E5-EC1639D25FD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiFormTranslator.DAL", "apiFormTranslator.DAL\apiFormTranslator.DAL.csproj", "{DA8105C7-DBE8-4D43-A796-1A55B0547E4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiFormTranslator.Model", "apiFormTranslator.Model\apiFormTranslator.Model.csproj", "{87D1BD80-4048-447D-85B4-E72ED8FE5F34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiFormTranslator.Service", "apiFormTranslator.Service\apiFormTranslator.Service.csproj", "{A6280065-5ED3-4203-B56F-21332725E134}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiFormTranslator.Presenter", "apiFormTranslator.Presenter\apiFormTranslator.Presenter.csproj", "{A2D66D75-2238-4C1F-B90C-1BCD1F47A4E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiFormTranslator.View", "apiFormTranslator.View\apiFormTranslator.View.csproj", "{40D750B1-1287-48BE-9380-42EBDF4016B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apiFormTranslator.WindowsUI", "apiFormTranslator.WindowsUI\apiFormTranslator.WindowsUI.csproj", "{27F097DC-F2AD-4B6C-B048-34E820A4E684}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://eub-tfs-01:8080/tfs/tds_dundalk
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = apiFormTranslator.DAL\\apiFormTranslator.DAL.csproj
+		SccProjectTopLevelParentUniqueName1 = apiFormTranslator.sln
+		SccProjectName1 = apiFormTranslator.DAL
+		SccLocalPath1 = apiFormTranslator.DAL
+		SccProjectUniqueName2 = apiFormTranslator.Model\\apiFormTranslator.Model.csproj
+		SccProjectTopLevelParentUniqueName2 = apiFormTranslator.sln
+		SccProjectName2 = apiFormTranslator.Model
+		SccLocalPath2 = apiFormTranslator.Model
+		SccProjectUniqueName3 = apiFormTranslator.Presenter\\apiFormTranslator.Presenter.csproj
+		SccProjectTopLevelParentUniqueName3 = apiFormTranslator.sln
+		SccProjectName3 = apiFormTranslator.Presenter
+		SccLocalPath3 = apiFormTranslator.Presenter
+		SccProjectUniqueName4 = apiFormTranslator.Service\\apiFormTranslator.Service.csproj
+		SccProjectTopLevelParentUniqueName4 = apiFormTranslator.sln
+		SccProjectName4 = apiFormTranslator.Service
+		SccLocalPath4 = apiFormTranslator.Service
+		SccProjectUniqueName5 = apiFormTranslator.View\\apiFormTranslator.View.csproj
+		SccProjectTopLevelParentUniqueName5 = apiFormTranslator.sln
+		SccProjectName5 = apiFormTranslator.View
+		SccLocalPath5 = apiFormTranslator.View
+		SccProjectUniqueName6 = apiFormTranslator.WindowsUI\\apiFormTranslator.WindowsUI.csproj
+		SccProjectTopLevelParentUniqueName6 = apiFormTranslator.sln
+		SccProjectName6 = apiFormTranslator.WindowsUI
+		SccLocalPath6 = apiFormTranslator.WindowsUI
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA8105C7-DBE8-4D43-A796-1A55B0547E4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8105C7-DBE8-4D43-A796-1A55B0547E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8105C7-DBE8-4D43-A796-1A55B0547E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8105C7-DBE8-4D43-A796-1A55B0547E4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87D1BD80-4048-447D-85B4-E72ED8FE5F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87D1BD80-4048-447D-85B4-E72ED8FE5F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87D1BD80-4048-447D-85B4-E72ED8FE5F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87D1BD80-4048-447D-85B4-E72ED8FE5F34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6280065-5ED3-4203-B56F-21332725E134}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6280065-5ED3-4203-B56F-21332725E134}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6280065-5ED3-4203-B56F-21332725E134}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6280065-5ED3-4203-B56F-21332725E134}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D66D75-2238-4C1F-B90C-1BCD1F47A4E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D66D75-2238-4C1F-B90C-1BCD1F47A4E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D66D75-2238-4C1F-B90C-1BCD1F47A4E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D66D75-2238-4C1F-B90C-1BCD1F47A4E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40D750B1-1287-48BE-9380-42EBDF4016B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D750B1-1287-48BE-9380-42EBDF4016B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D750B1-1287-48BE-9380-42EBDF4016B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D750B1-1287-48BE-9380-42EBDF4016B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27F097DC-F2AD-4B6C-B048-34E820A4E684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27F097DC-F2AD-4B6C-B048-34E820A4E684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27F097DC-F2AD-4B6C-B048-34E820A4E684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27F097DC-F2AD-4B6C-B048-34E820A4E684}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA8105C7-DBE8-4D43-A796-1A55B0547E4B} = {20FA3F93-8683-472F-9558-0D75C15EA85C}
+		{87D1BD80-4048-447D-85B4-E72ED8FE5F34} = {7B158C08-F1CF-4FCA-9A3B-7B854BF5F4BD}
+		{A6280065-5ED3-4203-B56F-21332725E134} = {4ED57FD3-BCBD-43D6-930C-A614EE79C45D}
+		{A2D66D75-2238-4C1F-B90C-1BCD1F47A4E5} = {3F0D6A05-EE64-47D9-8FDE-42D78BA4E977}
+		{40D750B1-1287-48BE-9380-42EBDF4016B2} = {3F0D6A05-EE64-47D9-8FDE-42D78BA4E977}
+		{27F097DC-F2AD-4B6C-B048-34E820A4E684} = {757F5423-5F4D-4D7F-B8E5-EC1639D25FD3}
+	EndGlobalSection
+EndGlobal
